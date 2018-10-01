@@ -1,8 +1,8 @@
 package com.packt.learn_spring_for_android_application_development.chapter7
 
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import android.os.Bundle
+import kotlinx.coroutines.experimental.*
+import kotlin.coroutines.experimental.CoroutineContext
 
 class Image
 
@@ -22,3 +22,24 @@ fun main(args: Array<String>) = runBlocking {
 fun showImages(image1: Image, image2: Image, image3: Image) {
     // .......
 }
+
+//class Component: CoroutineScope {
+//    lateinit var job: Job
+//    override val coroutineContext: CoroutineContext
+//        get() = Dispatchers.Main + job
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        job = Job()
+//    }
+//
+//    fun loadProfile() = launch {
+//        val image = async(Dispatchers.IO) { loadImage() }.await()
+//        showImage(image)
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        job.cancel()
+//    }
+//}
