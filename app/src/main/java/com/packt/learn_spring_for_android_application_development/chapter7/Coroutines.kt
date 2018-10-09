@@ -1,8 +1,8 @@
 package com.packt.learn_spring_for_android_application_development.chapter7
 
-import android.os.Bundle
-import kotlinx.coroutines.experimental.*
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.runBlocking
 
 class Image
 

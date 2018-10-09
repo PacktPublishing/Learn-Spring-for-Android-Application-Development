@@ -34,7 +34,7 @@ fun loadImage(avatar: String, callback: (Image) -> Unit) {
 fun main(args: Array<String>) {
     loadListOfFriends {users ->
         loadUserDetails(users.first().id) {user ->
-            loadImage(user.avatar) {image ->
+            loadImage(user.avatar) { image: Image ->
                 showImage(image)
             }
         }
