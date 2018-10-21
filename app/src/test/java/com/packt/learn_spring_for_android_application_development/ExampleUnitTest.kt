@@ -1,8 +1,10 @@
 package com.packt.learn_spring_for_android_application_development
 
+import com.packt.learn_spring_for_android_application_development.chapter7.loadImage
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.runBlocking
+import org.junit.Assert.assertNotNull
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,8 +12,10 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun comicLoading() = runBlocking {
+        val image = async { loadImage() }.await()
+        assertNotNull(image)
     }
 }
