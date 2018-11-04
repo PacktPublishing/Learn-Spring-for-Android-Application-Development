@@ -1,10 +1,10 @@
-package ktPackage
+package requiredAnnotation
 
 import org.springframework.beans.factory.annotation.Required
 
 
 
-class Users{
+class UsersForReq{
     private var village: String? = null
     private var name: String? = null
 

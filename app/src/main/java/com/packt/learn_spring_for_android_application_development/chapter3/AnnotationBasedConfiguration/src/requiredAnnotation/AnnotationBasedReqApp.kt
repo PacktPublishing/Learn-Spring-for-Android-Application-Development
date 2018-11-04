@@ -1,13 +1,12 @@
-package ktPackage
+package requiredAnnotation
 
 import org.springframework.context.support.ClassPathXmlApplicationContext
 
 
 fun main(args: Array<String>) {
-    val context = ClassPathXmlApplicationContext("beans.xml")
-    val users = context.getBean("users") as Users
+    val context = ClassPathXmlApplicationContext("requiredAnnotation/beans_for_req.xml")
+    val users = context.getBean("users") as UsersForReq
 
     println("Name: "+users.getName())
     println("Village: "+users.getVillage())
-
 }

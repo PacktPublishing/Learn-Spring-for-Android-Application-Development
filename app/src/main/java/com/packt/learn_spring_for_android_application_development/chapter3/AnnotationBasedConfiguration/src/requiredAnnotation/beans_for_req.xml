@@ -9,7 +9,7 @@
 
     <context:annotation-config/>  <!--after this tag, you have to write the beans-->
 
-    <bean id="users" class="ktPackage.Users">
+    <bean id="users" class="requiredAnnotation.UsersForReq">
         <property name="name" value="Naruto Uzumaki"/>
         <property name="village" value="Konohagakure"/>
     </bean>
