@@ -1,22 +1,13 @@
-package importAnnotation
+package lifecycleCallback
 
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
-import org.springframework.stereotype.Controller
+import org.springframework.context.annotation.Configuration
 
-@Controller
-class ConfigFoo {
-    @Bean
-    fun foo(): Foo{
+
+@Configuration
+open class ConfigFoo {
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    open fun foo(): Foo {
         return Foo()
-    }
-}
-
-@Controller
-@Import(ConfigFoo::class)
-class ConfigBoo {
-    @Bean
-    fun foo(): Boo {
-        return Boo()
     }
 }

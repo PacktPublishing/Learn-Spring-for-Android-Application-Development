@@ -1,12 +1,10 @@
-package importAnnotation
+package lifecycleCallback
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 fun main(args: Array<String>) {
-    val applicationContext = AnnotationConfigApplicationContext(ConfigBoo::class.java)
-
+    val applicationContext = AnnotationConfigApplicationContext(ConfigFoo::class.java)
 
     val foo: Foo = applicationContext.getBean(Foo::class.java)
-//    val boo: Boo = applicationContext.getBean(Boo::class.java)
-
+    applicationContext.registerShutdownHook()
 }

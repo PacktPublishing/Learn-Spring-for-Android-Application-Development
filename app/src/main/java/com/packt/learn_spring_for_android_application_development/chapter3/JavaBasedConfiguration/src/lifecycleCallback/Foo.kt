@@ -1,12 +1,11 @@
-package importAnnotation
+package lifecycleCallback
 
 class Foo{
-    init {
-        println("This is class Foo")
+    fun init(){
+        println("Foo is initializing...")
     }
-}
-class Boo{
-    init {
-        println("This is class Boo")
+
+    fun destroy(){
+        println("Foo is destroying...")
     }
 }
