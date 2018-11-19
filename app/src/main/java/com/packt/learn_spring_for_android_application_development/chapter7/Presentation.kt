@@ -32,22 +32,30 @@ data class Comic @JvmOverloads constructor(
 
 fun loadComic(callback: (Comic) -> Unit) {
     Executors.newSingleThreadExecutor().submit {
-        val url = "https://xkcd.com/info.0.json"
-        val restTemplate = RestTemplate()
-        restTemplate.messageConverters.add(MappingJackson2HttpMessageConverter())
-        val result = restTemplate.getForObject(url, Comic::class.java)
+        val result = loadComic()
         Handler(Looper.getMainLooper()).post { callback(result) }
     }
 }
 
+fun loadComic(): Comic {
+    val url = "https://xkcd.com/info.0.json"
+    val restTemplate = RestTemplate()
+    restTemplate.messageConverters.add(MappingJackson2HttpMessageConverter())
+    return restTemplate.getForObject(url, Comic::class.java)
+}
+
+fun loadBitmap(path: String?): Bitmap {
+    val url = URL(path)
+    val connection = url.openConnection() as HttpURLConnection
+    connection.doInput = true
+    connection.connect()
+    val input = connection.inputStream
+    return BitmapFactory.decodeStream(input)
+}
+
 fun loadImage(path: String, callback: (Bitmap) -> Unit) {
     Executors.newSingleThreadExecutor().submit {
-        val url = URL(path)
-        val connection = url.openConnection() as HttpURLConnection
-        connection.doInput = true
-        connection.connect()
-        val input = connection.inputStream
-        val bitmap = BitmapFactory.decodeStream(input)
+        val bitmap = loadBitmap(path)
         Handler(Looper.getMainLooper()).post { callback(bitmap) }
     }
 }
