@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Basic Auth in Kotlin</string>
+    <string name="user_title">User Name List</string>
+</resources>
