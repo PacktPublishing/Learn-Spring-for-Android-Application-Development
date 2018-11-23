@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val githubService: UserService = UserServiceImpl().getGithubServiceImpl(username,password)
+        val userService: UserService = UserServiceImpl().getUserServiceImplImpl(username,password)
 
-        val call: Call<List<UserModel>> = githubService.getUserList()
+        val call: Call<List<UserModel>> = userService.getUserList()
         call.enqueue(object: Callback<List<UserModel>> {
             override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
                 Log.wtf("PACKTPUB", t.message)

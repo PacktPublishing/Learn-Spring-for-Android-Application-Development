@@ -7,7 +7,7 @@ import springforandroid.pactpub.sunnat629.basicauthinkotlin.basicauth.BasicAuthI
 
 
 class UserServiceImpl{
-   fun getGithubServiceImpl(username:String, password:String): UserService {
+   fun getUserServiceImplImpl(username:String, password:String): UserService {
         val retrofit = Retrofit.Builder()
                 .client(getOkhttpClient(username, password))
                 .baseUrl("http://e92a19d6.ngrok.io")
