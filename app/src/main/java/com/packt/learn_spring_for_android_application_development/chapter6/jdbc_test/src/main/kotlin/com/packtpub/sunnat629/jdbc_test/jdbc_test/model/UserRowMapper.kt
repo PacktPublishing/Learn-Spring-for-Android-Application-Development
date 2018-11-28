@@ -4,11 +4,11 @@ import org.springframework.jdbc.core.RowMapper
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class StudentRowMapper : RowMapper<StudentModel>{
+class UserRowMapper : RowMapper<UserModel>{
 
     @Throws(SQLException::class)
-    override fun mapRow(row: ResultSet, rowNumber: Int): StudentModel? {
-        return StudentModel(row.getInt("id"),
+    override fun mapRow(row: ResultSet, rowNumber: Int): UserModel? {
+        return UserModel(row.getInt("id"),
                 row.getString("name"),
                 row.getString("email"),
                 row.getString("contact_number"))
