@@ -16,11 +16,6 @@ class UserController {
     @Autowired
     val userService: UserService?= null
 
-    @GetMapping
-    fun getTest(): String{
-        return "I am Sunnat..."
-    }
-
     @GetMapping(path = ["/users"])
     fun getAllUserNames(): ResponseEntity<List<UserModel>> {
         return ResponseEntity(userService!!.getAllUserList(),
