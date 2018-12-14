@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfigurer: WebSecurityConfigurerAdapter() {
+class SecurityConfiguration: WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder?) {
@@ -20,7 +20,7 @@ class SecurityConfigurer: WebSecurityConfigurerAdapter() {
                 .inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
              // user1 as USER
-                .withUser("user")
+                .withUser("sunnat")
                 .password(passwordEncoder().encode("password"))
                 .roles("USER")
                 .and()
