@@ -1,4 +1,4 @@
-package com.packtpub.sunnat629.ssbasicauth
+package com.packtpub.sunnat629.ssbasicauth.config
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
