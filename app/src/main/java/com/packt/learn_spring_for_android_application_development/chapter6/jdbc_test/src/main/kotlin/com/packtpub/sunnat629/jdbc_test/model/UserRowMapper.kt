@@ -1,10 +1,11 @@
-package com.packtpub.sunnat629.jdbc_test.jdbc_test.model
+package com.packtpub.sunnat629.jdbc_test.model
 
+import com.packtpub.sunnat629.jdbc_test.UserModel
 import org.springframework.jdbc.core.RowMapper
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class UserRowMapper : RowMapper<UserModel>{
+class UserRowMapper : RowMapper<UserModel> {
 
     @Throws(SQLException::class)
     override fun mapRow(row: ResultSet, rowNumber: Int): UserModel? {
