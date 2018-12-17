@@ -1,7 +1,7 @@
 package com.packtpub.sunnat629.jdbc_test.service
 
 import com.packtpub.sunnat629.jdbc_test.UserModel
-import com.packtpub.sunnat629.jdbc_test.repository.UserDao
+import com.packtpub.sunnat629.jdbc_test.repository.UserRepository
 import com.packtpub.sunnat629.jdbc_test.repository.UsersInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -9,25 +9,25 @@ import org.springframework.stereotype.Service
 @Service
 class UserService: UsersInterface {
     @Autowired
-    private lateinit var userDao: UserDao
+    private lateinit var userRepository: UserRepository
 
     override fun getAllUserList(): List<UserModel> {
-        return userDao.getAllUserList()
+        return userRepository.getAllUserList()
     }
 
     override fun getUserByID(id: Int): UserModel? {
-        return userDao.getUserByID(id)
+        return userRepository.getUserByID(id)
     }
 
     override fun addNewUser(userModel: UserModel) {
-        userDao.addNewUser(userModel)
+        userRepository.addNewUser(userModel)
     }
 
     override fun updateUser(userModel: UserModel, id: Int) {
-        userDao.updateUser(userModel, id)
+        userRepository.updateUser(userModel, id)
     }
 
     override fun deleteUser(id: Int) {
-        userDao.deleteUser(id)
+        userRepository.deleteUser(id)
     }
 }

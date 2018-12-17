@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserDao: UsersInterface {
+class UserRepository: UsersInterface {
 
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate

@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name="users")
-class UserModel: Serializable {
+class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
