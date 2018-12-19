@@ -13,7 +13,7 @@ class ResourceServerConfig: ResourceServerConfigurerAdapter(){
     override fun configure(http: HttpSecurity?) {
         http!!
                 .authorizeRequests()
-                .antMatchers("/").permitAll() // anyone can enter
+                .antMatchers("/open_for_all").permitAll() // anyone can enter
                 .antMatchers("/private").authenticated() // only authorized user can enter
     }
 }

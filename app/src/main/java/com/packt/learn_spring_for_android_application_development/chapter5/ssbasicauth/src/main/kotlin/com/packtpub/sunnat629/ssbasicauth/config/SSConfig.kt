@@ -19,20 +19,21 @@ class SSConfig: WebSecurityConfigurerAdapter() {
     private val authEntryPoint: AuthenticationEntryPoint? = null
 
     @Throws(Exception::class)
-    override fun configure(http: HttpSecurity): Unit {
+    override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
+                .formLogin()
+                .and()
                 .httpBasic()
                 .authenticationEntryPoint(authEntryPoint)
-
     }
 
 
     @Autowired
     @Throws(Exception::class)
-    fun configureGlobal(auth: AuthenticationManagerBuilder): Unit {
+    fun configureGlobal(auth: AuthenticationManagerBuilder){
 
         auth
                 .inMemoryAuthentication()

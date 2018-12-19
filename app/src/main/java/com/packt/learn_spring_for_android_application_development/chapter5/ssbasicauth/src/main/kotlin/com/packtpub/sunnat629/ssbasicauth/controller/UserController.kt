@@ -4,15 +4,16 @@ package com.packtpub.sunnat629.ssbasicauth.controller
 import com.packtpub.sunnat629.ssbasicauth.model.Users
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
-@Controller
+@RestController
+@RequestMapping(value = ["/"])
 class UserController {
 
-    @RequestMapping(path = ["/user"], method = [RequestMethod.GET])
+    @GetMapping(path = ["/users"])
     fun userList(): ResponseEntity<List<Users>>{
         return ResponseEntity(getUsers(), HttpStatus.OK)
     }

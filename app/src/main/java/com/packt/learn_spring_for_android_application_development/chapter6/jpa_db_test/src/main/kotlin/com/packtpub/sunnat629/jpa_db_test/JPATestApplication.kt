@@ -1,4 +1,4 @@
-package com.packtpub.sunnat629.jpa_db_test.jpa_db_test
+package com.packtpub.sunnat629.jpa_db_test
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

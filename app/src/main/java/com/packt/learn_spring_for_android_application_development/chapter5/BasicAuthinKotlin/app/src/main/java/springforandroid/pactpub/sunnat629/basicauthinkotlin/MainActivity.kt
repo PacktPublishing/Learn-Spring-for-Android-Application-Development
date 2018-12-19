@@ -15,8 +15,8 @@ import springforandroid.pactpub.sunnat629.basicauthinkotlin.repository.UserServi
 
 class MainActivity : AppCompatActivity() {
 
-    var username: String = "sunnat629"
-    var password: String = "password"
+    var username = "sunnat629"
+    var password = "password"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val call: Call<List<UserModel>> = userService.getUserList()
         call.enqueue(object: Callback<List<UserModel>> {
             override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
-                Log.wtf("PACKTPUB", t.message)
+                Log.e("PACKTPUB", t.message)
             }
 
             override fun onResponse(call: Call<List<UserModel>>, response: Response<List<UserModel>>) {
