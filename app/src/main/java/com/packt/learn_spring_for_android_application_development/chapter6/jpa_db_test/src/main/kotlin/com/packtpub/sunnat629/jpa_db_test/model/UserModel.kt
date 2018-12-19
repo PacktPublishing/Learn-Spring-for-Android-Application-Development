@@ -1,29 +1,31 @@
-package com.packtpub.sunnat629.jpa_db_test.jpa_db_test.model
+package com.packtpub.sunnat629.jpa_db_test.model
 
-import java.io.Serializable
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
 
 @Entity
-@Table(name="users")
-class UserModel {
+@Table(name="user_jpa")
+/**JPA entity listener to capture auditing information on persiting and updating entities.
+ * To get this one flying be sure you configure it as entity listener in your orm.xml as follows:
+ * */
+@EntityListeners(AuditingEntityListener::class)
 
+data class UserModel(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private var id: Long = 0
+    var id: Long = 0,
 
+    @NotBlank
     @Column(name = "name")
-    var name: String ?= null
+    var name: String ?= null,
 
+    @NotBlank
     @Column(name = "email")
-    var email: String ?= null
+    var email: String ?= null,
 
+    @NotBlank
     @Column(name = "contact_number")
     var contact_number: String ?= null
-
-    override fun toString(): String {
-        return "UserModel(id=$id, name=$name, email=$email, contact_number=$contact_number)"
-    }
-
-
-}
+)
