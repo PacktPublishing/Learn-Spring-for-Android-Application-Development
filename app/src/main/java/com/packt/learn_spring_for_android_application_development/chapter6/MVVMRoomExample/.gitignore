@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+.DS_Store
+.gradle/
+app/.gitignore
+app/libs/
+app/proguard-rules.pro
+gradlew
+gradlew.bat
+local.properties
+settings.gradle
