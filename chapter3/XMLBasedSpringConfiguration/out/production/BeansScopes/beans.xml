@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--Single Scope Example Start-->
+     <!--A bean example with single scope -->
+    <bean id="userGreeting" class ="ktPackage.UserGreeting"/>
+    <!--Or-->
+    <!--<bean id="userGreeting" class ="ktPackage.UserGreeting" />-->
+    <!--Single Scope Example End-->
+
+    <!--Prototype Scope Example Start-->
+    <!-- A bean example with prototype scope -->
+    <!--<bean id="userGreeting" class="ktPackage.UserGreeting" scope="prototype"/>-->
+    <!--Prototype Scope Example End-->
+
+    <!--Init and Destroy Example Start-->
+    <!--<bean id="userGreeting" class="ktPackage.UserGreeting" init-method="afterPropertiesSet" destroy-method="destroy"/>-->
+    <!--Init and Destroy Example End-->
+
+    <!--Constructor-based Dependency Injection Example Start-->
+    <!--<bean id="userGreeting" class="ktPackage.UserGreeting">-->
+        <!--<constructor-arg ref="userSurname" />-->
+    <!--</bean>-->
+    <!--<bean id="userSurname" class="ktPackage.UserSurname"/>-->
+    <!--Constructor-based Dependency Injection Example End-->
+
+    <!--Setter Injection Example Start-->
+    <!--<bean id="userGreeting" class="ktPackage.UserGreeting">-->
+        <!--<property name="userSurnameClass" ref="userSurname"/>-->
+    <!--</bean>-->
+    <!--<bean id="userSurname" class="ktPackage.UserSurname"/>-->
+    <!--Setter Injection Example End-->
+
+    <!--Beans Auto-Wiring Example Start-->
+    <!--<bean id="userGreeting" class="ktPackage.UserGreeting" autowire="byType"/>-->
+    <!--<bean id="userSurname" class="ktPackage.UserSurname" autowire-candidate="true"/>-->
+    <!--<bean id="xxxxx" class="ktPackage.XXXX" autowire-candidate="false"/> &lt;!&ndash;demoClass&ndash;&gt;-->
+    <!--<bean id="yyyyy" class="ktPackage.YYYY" autowire-candidate="false"/> &lt;!&ndash;demoClass&ndash;&gt;-->
+    <!--SBeans Auto-Wiring Example End-->
+
+</beans>
