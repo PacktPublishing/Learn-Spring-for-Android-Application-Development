@@ -22,8 +22,17 @@ class User : Serializable {
         this.username = name
     }
 
-    constructor(username: String, email: String, accCreatedTime: Instant, firstName: String?, lastName: String?, contactNumber: String?, dOB: Date?, image: String?, city: String?, country: String?) {
+    constructor(id: Long, name: String, password: String) {
+        this.id = id
+        this.username = name
+        this.password = name
+    }
+
+    constructor(username: String, password: String, email: String, accCreatedTime: Instant,
+                firstName: String?, lastName: String?, contactNumber: String?, dOB: Date?,
+                image: String?, city: String?, country: String?) {
         this.username = username
+        this.password = password
         this.email = email
         this.accCreatedTime = accCreatedTime
         this.firstName = firstName
@@ -40,10 +49,11 @@ class User : Serializable {
     var id: Long = 0
 
     @JsonProperty("username")
-    var username: String? = null
+    var username: String = ""
 
     @JsonIgnore
-    var password: String? = null
+    @JsonProperty("password")
+    var password: String = ""
 
     @JsonProperty("email")
     var email: String? = null

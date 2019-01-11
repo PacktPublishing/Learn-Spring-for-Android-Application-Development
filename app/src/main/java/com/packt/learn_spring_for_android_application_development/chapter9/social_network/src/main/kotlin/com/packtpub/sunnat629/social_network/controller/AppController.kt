@@ -29,11 +29,17 @@ class AppController {
     private lateinit var likeRepository: LikeRepository
 
 
+    @GetMapping("/")
+    fun getTest(): Any {
+        return "HELLO USER"
+    }
+
     // New User registration
     @PostMapping("/user/new")
     fun registerUser(@RequestBody user: User): Any{
-        if (!userExist.isUserExist(user.username!!)){
+        if (!userExist.isUserExist(user.username)){
             userRepository.save(user)
+            print(user)
             return user
         }
         return "{\"duplicate\": \"${user.username} is taken. Try another\"}"

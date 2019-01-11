@@ -13,7 +13,7 @@ class LikeObj(user: User) : Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("username","email","accCreatedTime","firstName","lastName",
+    @JsonIgnoreProperties("username","password","email","accCreatedTime","firstName","lastName",
             "contactNumber","dob","image","city","country")
     var user: User? = user
 
