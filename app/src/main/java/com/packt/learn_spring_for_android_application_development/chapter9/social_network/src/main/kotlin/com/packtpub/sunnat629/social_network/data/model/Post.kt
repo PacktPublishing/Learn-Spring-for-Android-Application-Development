@@ -6,13 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import java.io.Serializable
 import java.time.Instant
+import javax.persistence.FetchType
+
 
 @Entity
 class Post(text: String, postedBy: User) : Serializable {
 
     @Id
     @GeneratedValue
-    var id: Long = 0
+    var id: Long? = 0
 
     var text: String? = text
 
@@ -26,11 +28,12 @@ class Post(text: String, postedBy: User) : Serializable {
     @JsonProperty("postCreatedTime")
     var postCreatedTime: Instant? = Instant.now()
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    var comments: List<Comment>? = null
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, orphanRemoval=true)
+    val comments = mutableListOf<Comment>()
+
 
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    var likes: List<LikeObj>? = null
+    var likes: List<LikeObj>? = emptyList()
 
     companion object {
 

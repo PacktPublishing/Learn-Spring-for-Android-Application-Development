@@ -16,9 +16,6 @@ class CustomUserDetailsService: UserDetailsService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String?): UserDetails {
-        val user = userByNameRepository.getUserByName(username!!)
-
-        print("${user.username} : ${user.password}")
-        return CustomUserDetails(userByNameRepository.getUserByName(username))
+        return CustomUserDetails(userByNameRepository.getUserByName(username!!))
     }
 }

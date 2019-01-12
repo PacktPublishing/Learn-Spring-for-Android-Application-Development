@@ -12,7 +12,7 @@ class Comment(text: String, postedBy: User) : Serializable {
 
     @Id
     @GeneratedValue
-    var id: Long = 0
+    var id: Long? = 0
 
     var text: String? = text
 
