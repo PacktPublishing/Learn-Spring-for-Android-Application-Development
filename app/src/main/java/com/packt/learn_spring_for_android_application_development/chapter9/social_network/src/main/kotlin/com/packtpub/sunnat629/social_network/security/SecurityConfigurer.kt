@@ -9,11 +9,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
+import com.packtpub.sunnat629.social_network.service.CustomAuthenticationProvider
+import org.springframework.context.annotation.Bean
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 
 @Configuration
 @EnableWebSecurity
-class SSConfig: WebSecurityConfigurerAdapter() {
+class SecurityConfigurer: WebSecurityConfigurerAdapter() {
 
     @Autowired
     private lateinit var authEntryPoint: AuthenticationEntryPoint
@@ -40,6 +43,7 @@ class SSConfig: WebSecurityConfigurerAdapter() {
     fun configureGlobal(auth: AuthenticationManagerBuilder){
 
         auth
+//                .authenticationProvider(CustomAuthenticationProvider())
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(getPasswordEncoder())
 //                .inMemoryAuthentication()
@@ -49,7 +53,13 @@ class SSConfig: WebSecurityConfigurerAdapter() {
 //                .roles("USER")
     }
 
-    private fun getPasswordEncoder(): PasswordEncoder {
+//    @Bean
+//    fun passwordEncoder(): PasswordEncoder {
+//        return BCryptPasswordEncoder()
+//    }
+//
+@Bean
+     fun getPasswordEncoder(): PasswordEncoder {
         return object : PasswordEncoder {
             override fun encode(charSequence: CharSequence): String {
                 return charSequence.toString()

@@ -5,6 +5,9 @@ import com.packtpub.sunnat629.social_network.data.model.Post
 import com.packtpub.sunnat629.social_network.data.model.User
 import com.packtpub.sunnat629.social_network.repository.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Bean
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -25,6 +28,9 @@ class AppController {
     @Autowired
     private lateinit var likeRepository: LikeRepository
 
+    @Autowired
+    lateinit var passwordEncoder: PasswordEncoder
+
 
     @GetMapping("/")
     fun getTest(): Any {
@@ -35,6 +41,7 @@ class AppController {
     @PostMapping("/user/new")
     fun registerUser(@RequestBody user: User): Any{
         if (!userExist.isUserExist(user.username)){
+            user.password = passwordEncoder.encode(user.password)
             userRepository.save(user)
             return user
         }
