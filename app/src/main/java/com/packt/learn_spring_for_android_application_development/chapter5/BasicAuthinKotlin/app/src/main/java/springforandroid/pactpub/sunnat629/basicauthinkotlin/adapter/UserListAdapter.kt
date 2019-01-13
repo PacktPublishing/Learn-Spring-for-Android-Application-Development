@@ -27,7 +27,7 @@ class UserListAdapter(context: Context,
 
         name.text = userDetails.name
         email.text = userDetails.email
-        contactNumber.text = userDetails.contactNumber
+        contactNumber.text = userDetails.contact_number
 
         return rowView
     }

@@ -9,8 +9,8 @@ import springforandroid.pactpub.sunnat629.basicauthinkotlin.basicauth.BasicAuthI
 class UserServiceImpl{
    fun getUserServiceImplImpl(username:String, password:String): UserService {
         val retrofit = Retrofit.Builder()
-//                .client(getOkhttpClient(username, password))
-                .baseUrl("http://e5736ab7.ngrok.io")
+                .client(getOkhttpClient(username, password))
+                .baseUrl("http://10.0.2.2:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         return retrofit.create(UserService::class.java)

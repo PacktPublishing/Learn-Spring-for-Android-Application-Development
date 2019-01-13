@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import springforandroid.pactpub.sunnat629.basicauthinkotlin.model.UserModel
 
 interface UserService {
-    @GET("jpa_db_test/users")
+    @GET("/users")
     fun getUserList(): Call<List<UserModel>>
 }
