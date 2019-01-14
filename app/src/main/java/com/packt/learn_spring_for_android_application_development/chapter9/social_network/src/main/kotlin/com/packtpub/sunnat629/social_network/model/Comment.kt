@@ -1,4 +1,4 @@
-package com.packtpub.sunnat629.social_network.data.model
+package com.packtpub.sunnat629.social_network.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
@@ -8,7 +8,7 @@ import java.io.Serializable
 import java.time.Instant
 
 @Entity
-class Comment(text: String, postedBy: User) : Serializable {
+class Comment(text: String, postedBy: Profile) : Serializable {
 
     @Id
     @GeneratedValue
@@ -22,13 +22,12 @@ class Comment(text: String, postedBy: User) : Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "profile_id")
     @JsonIgnoreProperties("username","password","email","accCreatedTime","firstName","lastName",
-            "contactNumber","dob","image","city","country")
-    var postedBy: User? = postedBy
+            "contactNumber","dob","city","country")
+    var postedBy: Profile? = postedBy
 
     companion object {
-
         private const val serialVersionUID = 1L
     }
 }

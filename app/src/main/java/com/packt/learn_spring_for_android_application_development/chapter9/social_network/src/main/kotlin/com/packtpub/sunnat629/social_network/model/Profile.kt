@@ -1,4 +1,4 @@
-package com.packtpub.sunnat629.social_network.data.model
+package com.packtpub.sunnat629.social_network.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -7,12 +7,13 @@ import java.time.Instant
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
 //@JsonIgnoreProperties( "email","accCreatedTime","firstName","lastName",
-//        "contactNumber","dob","image","city","country")
-class User : Serializable {
+//        "contactNumber","dob","city","country")
+class Profile : Serializable {
 
     constructor(id: Long) {
         this.id = id
@@ -25,12 +26,12 @@ class User : Serializable {
     constructor(id: Long, name: String, password: String) {
         this.id = id
         this.username = name
-        this.password = name
+        this.password = password
     }
 
     constructor(username: String, password: String, email: String, accCreatedTime: Instant,
                 firstName: String?, lastName: String?, contactNumber: String?, dOB: Date?,
-                image: String?, city: String?, country: String?) {
+                city: String?, country: String?) {
         this.username = username
         this.password = password
         this.email = email
@@ -39,13 +40,26 @@ class User : Serializable {
         this.lastName = lastName
         this.contactNumber = contactNumber
         this.dOB = dOB
-        this.image = image
+        this.city = city
+        this.country = country
+    }
+
+    // Testing purpose
+    constructor(username: String, password: String, email: String, firstName: String?, lastName: String?) {
+        this.username = username
+        this.password = password
+        this.email = email
+        this.accCreatedTime = accCreatedTime
+        this.firstName = firstName
+        this.lastName = lastName
+        this.contactNumber = contactNumber
+        this.dOB = dOB
         this.city = city
         this.country = country
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = 0
 
     @JsonProperty("username")
@@ -72,9 +86,6 @@ class User : Serializable {
 
     @JsonProperty("dob")
     var dOB: Date? = null
-
-    @JsonProperty("image")
-    var image: String? = null
 
     @JsonProperty("city")
     var city: String? = null

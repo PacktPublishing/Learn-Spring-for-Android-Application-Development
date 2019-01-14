@@ -1,41 +1,40 @@
 package com.packtpub.sunnat629.social_network.repository
 
-import com.packtpub.sunnat629.social_network.data.model.User
-import com.packtpub.sunnat629.social_network.data.model.UserRowMapper
+import com.packtpub.sunnat629.social_network.model.Profile
+import com.packtpub.sunnat629.social_network.model.UserRowMapper
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserByNameRepository: UserByNameRepositoryInterface {
+class UserByNameRepository: UserByNameInterface {
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate
 
-    override fun getUserByName(username: String): User {
-        val sql = "SELECT * FROM USER WHERE username = ?"
-        val user = jdbcTemplate.queryForObject(sql, UserRowMapper(), username)
+    override fun getUserByName(username: String): Profile {
+        val sql = "SELECT * FROM PROFILE WHERE username = ?"
+        val profile = jdbcTemplate.queryForObject(sql, UserRowMapper(), username)
 
-        return user!!
+
+        return profile!!
     }
 
     override fun getUserByNamePassword(username: String, password: String): Boolean {
         println("*********** $username : $password")
 
-        val sql = "SELECT * FROM USER WHERE username = ?, password = ?"
-        val user = jdbcTemplate.queryForObject(sql, UserRowMapper(), username, password)
+        val sql = "SELECT * FROM PROFILE WHERE username = ?, password = ?"
+        val profile = jdbcTemplate.queryForObject(sql, UserRowMapper(), username, password)
 
-        println("*********** ${user?.username}")
+        println("*********** ${profile?.username}")
 
-        return user != null
+        return profile != null
     }
-
 }
 
-interface UserByNameRepositoryInterface{
-        fun getUserByName(username: String): User
-        fun getUserByNamePassword(username: String, password: String): Boolean
+
+interface UserByNameInterface {
+    fun getUserByName(username: String): Profile
+    fun getUserByNamePassword(username: String, password: String): Boolean
 }
+
 

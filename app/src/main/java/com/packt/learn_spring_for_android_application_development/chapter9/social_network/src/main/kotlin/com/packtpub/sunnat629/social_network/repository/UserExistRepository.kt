@@ -10,7 +10,7 @@ class UserExistRepository: UserExistInterface {
     private lateinit var jdbcTemplate: JdbcTemplate
 
     override fun isUserExist(name: String): Boolean {
-        val sql = "SELECT count(*) FROM USER WHERE username = ?"
+        val sql = "SELECT count(*) FROM PROFILE WHERE username = ?"
         val count = jdbcTemplate.queryForObject(sql, Int::class.java, name)
         return count != 0
     }

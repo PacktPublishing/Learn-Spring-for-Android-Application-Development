@@ -1,4 +1,4 @@
-package com.packtpub.sunnat629.social_network.data.model
+package com.packtpub.sunnat629.social_network.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
@@ -10,7 +10,7 @@ import javax.persistence.FetchType
 
 
 @Entity
-class Post(text: String, postedBy: User) : Serializable {
+class Post(text: String, postedBy: Profile) : Serializable {
 
     @Id
     @GeneratedValue
@@ -18,11 +18,11 @@ class Post(text: String, postedBy: User) : Serializable {
 
     var text: String? = text
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
     @JsonIgnoreProperties("username","password", "email","accCreatedTime","firstName","lastName",
-            "contactNumber","dob","image","city","country")
-    var postedBy: User? = postedBy
+            "contactNumber","dob","city","country")
+    var postedBy: Profile? = postedBy
 
     @JsonIgnore
     @JsonProperty("postCreatedTime")

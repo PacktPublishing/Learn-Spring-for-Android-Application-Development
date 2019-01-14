@@ -1,12 +1,11 @@
 package com.packtpub.sunnat629.social_network.controller
 
-import com.packtpub.sunnat629.social_network.data.model.Comment
-import com.packtpub.sunnat629.social_network.data.model.Post
-import com.packtpub.sunnat629.social_network.data.model.User
+import com.packtpub.sunnat629.social_network.model.Comment
+import com.packtpub.sunnat629.social_network.model.Post
+import com.packtpub.sunnat629.social_network.model.Profile
 import com.packtpub.sunnat629.social_network.repository.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -14,7 +13,7 @@ import java.util.*
 @RestController
 class AppController {
     @Autowired
-    private lateinit var userRepository: UserRepository
+    private lateinit var profileRepository: ProfileRepository
 
     @Autowired
     private lateinit var userExist: UserExistRepository
@@ -29,43 +28,71 @@ class AppController {
     private lateinit var likeRepository: LikeRepository
 
     @Autowired
-    lateinit var passwordEncoder: PasswordEncoder
+    private lateinit var passwordEncoder: PasswordEncoder
 
+    @Autowired
+    private lateinit var deletePCLRepository: DeletePCLRepository
 
     @GetMapping("/")
     fun getTest(): Any {
         return "HELLO USER"
     }
 
-    // New User registration
-    @PostMapping("/user/new")
-    fun registerUser(@RequestBody user: User): Any{
-        if (!userExist.isUserExist(user.username)){
-            user.password = passwordEncoder.encode(user.password)
-            userRepository.save(user)
-            return user
+    // New Profile registration
+    @PostMapping("/profile/new")
+    fun registerUser(@RequestBody profile: Profile): Any {
+        if (!userExist.isUserExist(profile.username)) {
+            profile.password = passwordEncoder.encode(profile.password)
+            profileRepository.save(profile)
+            return profile
         }
-        return "{\"duplicate\": \"${user.username} is taken. Try another\"}"
+        return "{\"duplicate\": \"${profile.username} is taken. Try another\"}"
     }
 
-    // Get User by ID
-    @GetMapping("/user/{id}")
+    // Get Profile by ID
+    @GetMapping("/profile/{id}")
     fun getUserById(@PathVariable("id") id: Long): Any {
-        return userRepository.findById(id)
+        return profileRepository.findById(id)
+    }
+
+    // Get All Profiles
+    @GetMapping("/profiles")
+    fun getUserById(): Any {
+        return profileRepository.findAll()
     }
 
 
-    // Post status by User ID
-    @PostMapping("/post/{user_id}/new")
-    fun submitPost(@PathVariable("user_id") user_id: Long, @RequestParam text: String): Any {
+    //     Update Profile by ID
+    @PutMapping("/profile/{id}")
+    fun updateUserById(@PathVariable("id") id: Long, @RequestBody mUser: Profile): Any {
+        val profile = profileRepository.getOne(id)
+        if (mUser.firstName != null) profile.firstName = mUser.firstName
+        if (mUser.lastName != null) profile.lastName = mUser.lastName
+        if (mUser.contactNumber != null) profile.contactNumber = mUser.contactNumber
+        if (mUser.city != null) profile.city = mUser.city
+        if (mUser.country != null) profile.country = mUser.country
+        return profileRepository.save(profile)
+    }
+
+    // Delete Profile by ID
+    @DeleteMapping("/profile/{userId}")
+    fun deleteUserById(@PathVariable("userId") userId: Long): Any {
+        deletePostByUserId(userId)
+        deletePCLRepository.deleteAllUsersInfoByUserID(userId)
+        return profileRepository.deleteById(userId)
+    }
+
+    // Post status by Profile ID
+    @PostMapping("/post/{profile_id}/new")
+    fun submitPost(@PathVariable("profile_id") profile_id: Long, @RequestParam text: String): Any {
 //        val mPost: Post? = null
 //        mPost!!.text = text
-//        mPost.postedBy = User(user_id)
+//        mPost.postedBy = Profile(profile_id)
 //        mPost.postCreatedTime = mPost.postCreatedTime
 
 //        postRepository.save(mPost)
-        println("$user_id : $text")
-        val mPost = Post(text, User(user_id))
+        println("$profile_id : $text")
+        val mPost = Post(text, Profile(profile_id))
         postRepository.save(mPost)
 
         return mPost
@@ -77,40 +104,38 @@ class AppController {
         return postRepository.findAll()
     }
 
-    // Get all posted status by User ID
-    @GetMapping("/post/{user_id}")
-    fun getPostById(@PathVariable("user_id") id: Long): Any {
+    // Get all posted status by Profile ID
+    @GetMapping("/post/{id}")
+    fun getPostById(@PathVariable("id") id: Long): Any {
         return postRepository.findById(id)
     }
 
+    // Update all posted status by Profile ID
+    @PutMapping("/post/{profile_id}")
+    fun updatePostById(@PathVariable("profile_id") id: Long, @RequestParam text: String): Any {
+        val modifiedPost = postRepository.getOne(id)
+        modifiedPost.text = text
+        return postRepository.save(modifiedPost)
+    }
 
-    // Delete a posted status by User ID
-    @DeleteMapping("/post/{user_id}")
-    fun deletePostById(@PathVariable("user_id") id: Long): Any {
-        // TODO need to delete comment, link
+
+    // Delete a posted status by Profile ID
+    @DeleteMapping("/post/{id}")
+    fun deletePostByUserId(@PathVariable("id") id: Long): Any {
         return postRepository.deleteById(id)
     }
 
 
-    // Post comment in a post by User ID and Post ID
-    @PostMapping("/comment/new")
-    fun postCommentByPostId(@RequestParam id: Long,
-                            @RequestParam postId: Long ,
-                            @RequestParam commentText: String): Any {
+    // Post comment in a post by Profile ID and Post ID
+    @PostMapping("/comment/{post_id}")
+    fun postCommentByPostId(@PathVariable("post_id") postId: Long, @RequestParam id: Long, @RequestParam commentText: String): Any {
         val optionalPost: Optional<Post> = postRepository.findById(postId)
-
-
-
-        return if(optionalPost.isPresent){
-            val comment = Comment(commentText, User(id))
-
+        return if (optionalPost.isPresent) {
+            val comment = Comment(commentText, Profile(id))
             val post = optionalPost.get()
-
             post.comments.add(comment)
             postRepository.save(post)
-
             return post
-
         } else {
             "There is no post.."
         }
@@ -118,30 +143,30 @@ class AppController {
 
     // get comment List of a post
     @GetMapping("/comment/{id}")
-    fun getCommentListByPostId(@PathVariable("id") id: Long): Any {
-        return userRepository.findById(id)
+    fun getCommentListByPostId(@PathVariable("id") id: Long, @RequestParam text: String): Any {
+        val modifiedComment = commentRepository.getOne(id)
+        modifiedComment.text = text
+        return commentRepository.save(modifiedComment)
     }
 
     // delete comment List of a status
     @DeleteMapping("/comment/{id}")
     fun deleteCommentByPostId(@PathVariable("id") id: Long): Any {
-        return userRepository.findById(id)
+        return commentRepository.findById(id)
     }
 
 
-
-    // post a like in a status
-    @PostMapping("/like/{id}")
-    fun postLikeByPostIdUserID(@PathVariable("id") id: Long): Any {
-        deleteLikeByPostIdUserID(id)
-        return userRepository.findById(id)
-    }
-
-    // remove a like from a status
-    @GetMapping("/like/{id}")
-    fun deleteLikeByPostIdUserID(@PathVariable("id") id: Long): Any {
-        return userRepository.findById(id)
-    }
+//    // post a like in a status
+//    @PostMapping("/like/{id}")
+//    fun postLikeByPostIdUserID(@PathVariable("id") id: Long): Boolean {
+//        return false
+//    }
+//
+//    // remove a like from a status
+//    @GetMapping("/like/{id}")
+//    fun deleteLikeByPostIdUserID(@PathVariable("id") id: Long): Boolean {
+//        return false
+//    }
 
 
 }

@@ -1,20 +1,26 @@
 package com.packtpub.sunnat629.social_network.repository
 
-import com.packtpub.sunnat629.social_network.data.model.Comment
-import com.packtpub.sunnat629.social_network.data.model.LikeObj
-import com.packtpub.sunnat629.social_network.data.model.Post
-import com.packtpub.sunnat629.social_network.data.model.User
-import org.springframework.data.repository.CrudRepository
+import com.packtpub.sunnat629.social_network.model.Comment
+import com.packtpub.sunnat629.social_network.model.LikeObj
+import com.packtpub.sunnat629.social_network.model.Post
+import com.packtpub.sunnat629.social_network.model.Profile
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.NoRepositoryBean
+import org.springframework.data.repository.query.Param
+import org.springframework.data.repository.query.QueryByExampleExecutor
 import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
 
 @Repository
-interface UserRepository : CrudRepository<User, Long>
+interface ProfileRepository : JpaRepository<Profile, Long>, QueryByExampleExecutor<Profile>
 
 @Repository
-interface PostRepository : CrudRepository<Post, Long>
+interface PostRepository : JpaRepository<Post, Long>
 
 @Repository
-interface CommentRepository : CrudRepository<Comment, Long>
+interface CommentRepository : JpaRepository<Comment, Long>
 
 @Repository
-interface LikeRepository : CrudRepository<LikeObj, Long>
+interface LikeRepository : JpaRepository<LikeObj, Long>
+

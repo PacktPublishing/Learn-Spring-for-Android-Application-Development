@@ -3,6 +3,7 @@ package com.packtpub.sunnat629.social_network.service
 import com.packtpub.sunnat629.social_network.repository.UserByNameRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.authority.AuthorityUtils
+import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -17,13 +18,10 @@ class CustomUserDetailsService: UserDetailsService {
     private lateinit var userByNameRepository: UserByNameRepository
 
     @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(username: String): UserDetails? {
-        val user = userByNameRepository.getUserByName(username)
+    override fun loadUserByUsername(username: String): User {
+        val profile = userByNameRepository.getUserByName(username)
 
-
-        println("************* ${user.password}")
-
-        return org.springframework.security.core.userdetails.User(username, user.password,
+        return org.springframework.security.core.userdetails.User(username, profile.password,
                 AuthorityUtils.createAuthorityList("USER"))
     }
 }
