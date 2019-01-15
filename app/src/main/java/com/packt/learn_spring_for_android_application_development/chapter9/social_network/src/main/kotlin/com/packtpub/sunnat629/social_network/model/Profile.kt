@@ -30,8 +30,7 @@ class Profile : Serializable {
     }
 
     constructor(username: String, password: String, email: String, accCreatedTime: Instant,
-                firstName: String?, lastName: String?, contactNumber: String?, dOB: Date?,
-                city: String?, country: String?) {
+                firstName: String?, lastName: String?, contactNumber: String?, country: String?) {
         this.username = username
         this.password = password
         this.email = email
@@ -39,8 +38,6 @@ class Profile : Serializable {
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
-        this.dOB = dOB
-        this.city = city
         this.country = country
     }
 
@@ -53,8 +50,6 @@ class Profile : Serializable {
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
-        this.dOB = dOB
-        this.city = city
         this.country = country
     }
 
@@ -83,12 +78,6 @@ class Profile : Serializable {
 
     @JsonProperty("contactNumber")
     var contactNumber: String? = null
-
-    @JsonProperty("dob")
-    var dOB: Date? = null
-
-    @JsonProperty("city")
-    var city: String? = null
 
     @JsonProperty("country")
     var country: String? = null

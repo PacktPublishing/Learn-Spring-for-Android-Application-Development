@@ -69,7 +69,6 @@ class AppController {
         if (mUser.firstName != null) profile.firstName = mUser.firstName
         if (mUser.lastName != null) profile.lastName = mUser.lastName
         if (mUser.contactNumber != null) profile.contactNumber = mUser.contactNumber
-        if (mUser.city != null) profile.city = mUser.city
         if (mUser.country != null) profile.country = mUser.country
         return profileRepository.save(profile)
     }
@@ -127,11 +126,12 @@ class AppController {
 
 
     // Post comment in a post by Profile ID and Post ID
-    @PostMapping("/comment/{post_id}")
-    fun postCommentByPostId(@PathVariable("post_id") postId: Long, @RequestParam id: Long, @RequestParam commentText: String): Any {
+    @PostMapping("/comment/{user_id}/{post_id}")
+    fun postCommentByPostId(@PathVariable("post_id") postId: Long, @PathVariable("user_id") userId: Long,
+                            @RequestParam commentText: String): Any {
         val optionalPost: Optional<Post> = postRepository.findById(postId)
         return if (optionalPost.isPresent) {
-            val comment = Comment(commentText, Profile(id))
+            val comment = Comment(commentText, Profile(userId))
             val post = optionalPost.get()
             post.comments.add(comment)
             postRepository.save(post)
