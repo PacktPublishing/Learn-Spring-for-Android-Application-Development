@@ -3,7 +3,6 @@ package com.sunnat629.testingwithespresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -27,7 +26,7 @@ class MainActivityTest{
     @Test
     fun getCountUser(){
         onView(withId(R.id.userLists))
-            .check(matches(itemCount(20)))
+            .check(matches(itemCount(100)))
     }
 
     // User count with the help of Assertion
@@ -42,7 +41,7 @@ class MainActivityTest{
     fun getUserPosition(){
         onView(withId(R.id.userLists))
             .perform(actionOnItemAtPosition
-            <RecyclerView.ViewHolder>(0, click()))
+            <RecyclerView.ViewHolder>(33, click()))
     }
 
     // User list display test

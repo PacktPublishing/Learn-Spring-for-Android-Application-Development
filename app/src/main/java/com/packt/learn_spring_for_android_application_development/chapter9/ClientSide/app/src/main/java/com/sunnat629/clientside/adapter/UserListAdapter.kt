@@ -1,4 +1,4 @@
-package springforandroid.pactpub.sunnat629.basicauthinkotlin.adapter
+package com.sunnat629.clientside.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import springforandroid.pactpub.sunnat629.basicauthinkotlin.R
-import springforandroid.pactpub.sunnat629.basicauthinkotlin.model.UserModel
+import com.sunnat629.clientside.R
+import com.sunnat629.clientside.model.UserModel
 
 class UserListAdapter(context: Context,
                       private val userList: List<UserModel>?) : BaseAdapter() {

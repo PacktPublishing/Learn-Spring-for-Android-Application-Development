@@ -1,9 +1,9 @@
-package springforandroid.pactpub.sunnat629.basicauthinkotlin.repository
+package com.sunnat629.clientside.repository
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import springforandroid.pactpub.sunnat629.basicauthinkotlin.basicauth.BasicAuthInterceptor
+import com.sunnat629.clientside.basicauth.BasicAuthInterceptor
 
 
 class UserServiceImpl{

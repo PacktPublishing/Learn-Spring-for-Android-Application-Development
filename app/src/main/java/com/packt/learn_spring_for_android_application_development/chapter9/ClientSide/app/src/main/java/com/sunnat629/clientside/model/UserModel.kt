@@ -1,4 +1,4 @@
-package springforandroid.pactpub.sunnat629.basicauthinkotlin.model
+package com.sunnat629.clientside.model
 
 
 class UserModel (val name: String?,

@@ -2,7 +2,6 @@ package com.packtpub.sunnat629.social_network
 
 import com.packtpub.sunnat629.social_network.model.Profile
 import com.packtpub.sunnat629.social_network.repository.ProfileRepository
-import com.packtpub.sunnat629.social_network.repository.UserByNameRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +24,6 @@ class ProfileRepositoryTest {
     fun getUserTesting(){
         val newProfile = getNewProfile()
         val saveProfile = entityManager.merge(newProfile)
-        entityManager.flush()
 
         val foundProfile = profileRepository.getOne(saveProfile.id!!)
 
@@ -34,11 +32,11 @@ class ProfileRepositoryTest {
     }
 
     private fun getNewProfile(): Profile {
-        return Profile( "sunnat",
+        return Profile( "naruto",
                 "12345",
-                "suncha629@gmail.com",
-                "Mohi-Us",
-                "Sunnat")
+                "naruto123@gmail.com",
+                "Naruto",
+                "Uzumak")
     }
 
   }

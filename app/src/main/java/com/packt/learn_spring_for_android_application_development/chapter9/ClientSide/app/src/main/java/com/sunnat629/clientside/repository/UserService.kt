@@ -1,8 +1,8 @@
-package springforandroid.pactpub.sunnat629.basicauthinkotlin.repository
+package com.sunnat629.clientside.repository
 
 import retrofit2.Call
 import retrofit2.http.GET
-import springforandroid.pactpub.sunnat629.basicauthinkotlin.model.UserModel
+import com.sunnat629.clientside.model.UserModel
 
 interface UserService {
     @GET("/users")

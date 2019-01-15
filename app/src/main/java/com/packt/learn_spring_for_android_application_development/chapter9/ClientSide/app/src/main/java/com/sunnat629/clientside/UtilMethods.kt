@@ -1,4 +1,4 @@
-package com.imrankst1221.kotlin.api
+package com.sunnat629.clientside
 import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
@@ -24,7 +24,9 @@ object UtilMethods {
     fun showLoading(context: Context){
         progressDialogBuilder = AlertDialog.Builder(context)
         progressDialogBuilder.setCancelable(false) // if you want user to wait for some process to finish,
-        progressDialogBuilder.setView(R.layout.layout_loading_dialog)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            progressDialogBuilder.setView(R.layout.layout_loading_dialog)
+        }
 
         progressDialog = progressDialogBuilder.create()
         progressDialog.show()

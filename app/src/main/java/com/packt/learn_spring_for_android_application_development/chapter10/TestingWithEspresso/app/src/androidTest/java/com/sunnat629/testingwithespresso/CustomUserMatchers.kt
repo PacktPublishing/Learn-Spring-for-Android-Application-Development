@@ -1,6 +1,5 @@
 package com.sunnat629.testingwithespresso
 
-import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.v7.widget.RecyclerView
 import android.view.View
