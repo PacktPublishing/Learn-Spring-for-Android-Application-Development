@@ -1,4 +1,5 @@
-package com.sunnat629.clientside
+package com.sunnat629.clientside.util
+
 import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
@@ -6,10 +7,10 @@ import android.net.NetworkInfo
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import com.sunnat629.clientside.R
+import android.support.v4.content.ContextCompat.getSystemService
 
-/**
- * Created by imran on 27/Dec/2017.
- */
+
 object UtilMethods {
 
     private lateinit var progressDialogBuilder: AlertDialog.Builder

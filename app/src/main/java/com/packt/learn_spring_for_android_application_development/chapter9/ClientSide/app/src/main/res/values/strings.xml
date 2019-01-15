@@ -5,4 +5,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_profile">Profile</string>
+    <string name="sample">
+        Learn Spring for Android Application Development by S M Mohi Us Sunnat, Igor Kucherenko.\n
+        Build amazing applications with the power of Spring modules and the efficiency of Kotlin</string>
+
+    <string name="just_now">just now</string>
+    <string name="minute_ago">1 min ago</string>
+    <string name="minutes_ago">%d mins ago</string>
 </resources>

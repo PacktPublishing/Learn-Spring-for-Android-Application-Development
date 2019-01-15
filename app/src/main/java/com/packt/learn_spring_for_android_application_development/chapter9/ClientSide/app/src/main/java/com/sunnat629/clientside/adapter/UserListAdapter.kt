@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.sunnat629.clientside.R
+import com.sunnat629.clientside.model.Profile
 import com.sunnat629.clientside.model.UserModel
 
-class UserListAdapter(context: Context,
-                      private val userList: List<UserModel>?) : BaseAdapter() {
+class UserListAdapter(
+    context: Context,
+    private val userList: List<Profile>
+) : BaseAdapter() {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
             as LayoutInflater

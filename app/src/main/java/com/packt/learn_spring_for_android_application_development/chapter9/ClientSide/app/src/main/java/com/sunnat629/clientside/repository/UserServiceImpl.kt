@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.sunnat629.clientside.basicauth.BasicAuthInterceptor
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 
 class UserServiceImpl{
@@ -12,7 +13,9 @@ class UserServiceImpl{
                 .client(getOkhttpClient(username, password))
                 .baseUrl("http://10.0.2.2:8080")
                 .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
+            .build()
         return retrofit.create(UserService::class.java)
     }
 

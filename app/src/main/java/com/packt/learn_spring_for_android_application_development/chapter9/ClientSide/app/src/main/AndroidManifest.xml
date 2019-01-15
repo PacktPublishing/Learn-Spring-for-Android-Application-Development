@@ -15,7 +15,7 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".HomeActivity"
+        <activity android:name=".MainActivity"
                   android:label="@string/app_name"
                   android:launchMode="singleTop"
                   android:screenOrientation="portrait">
@@ -25,8 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".MainActivity">
-        </activity>
+        <!--<activity-->
+                <!--android:name=".MainActivity">-->
+        <!--</activity>-->
     </application>
 </manifest>
