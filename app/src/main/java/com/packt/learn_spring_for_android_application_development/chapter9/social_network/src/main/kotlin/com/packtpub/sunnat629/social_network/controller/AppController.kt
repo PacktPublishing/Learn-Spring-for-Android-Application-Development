@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import org.springframework.data.domain.Sort
 
 @RestController
 class AppController {
@@ -32,6 +33,7 @@ class AppController {
 
     @Autowired
     private lateinit var deletePCLRepository: DeletePCLRepository
+
 
     @GetMapping("/")
     fun getTest(): Any {
@@ -90,17 +92,16 @@ class AppController {
 //        mPost.postCreatedTime = mPost.postCreatedTime
 
 //        postRepository.save(mPost)
-        println("$profile_id : $text")
         val mPost = Post(text, Profile(profile_id))
         postRepository.save(mPost)
 
-        return mPost
+        return postRepository.findAll(Sort(Sort.Direction.DESC, "postCreatedTime"))
     }
 
     // Get all posted status
     @GetMapping("/posts")
     fun getPostList(): Any {
-        return postRepository.findAll()
+        return postRepository.findAll(Sort(Sort.Direction.DESC, "postCreatedTime"))
     }
 
     // Get all posted status by Profile ID
@@ -141,13 +142,13 @@ class AppController {
         }
     }
 
-    // get comment List of a post
-    @GetMapping("/comment/{id}")
-    fun getCommentListByPostId(@PathVariable("id") id: Long, @RequestParam text: String): Any {
-        val modifiedComment = commentRepository.getOne(id)
-        modifiedComment.text = text
-        return commentRepository.save(modifiedComment)
-    }
+//    // get comment List of a post
+//    @GetMapping("/comment/{id}")
+//    fun getCommentListByPostId(@PathVariable("id") id: Long, @RequestParam text: String): Any {
+//        val modifiedComment = commentRepository.getOne(id)
+//        modifiedComment.text = text
+//        return commentRepository.save(modifiedComment)
+//    }
 
     // delete comment List of a status
     @DeleteMapping("/comment/{id}")
@@ -157,8 +158,9 @@ class AppController {
 
 
 //    // post a like in a status
-//    @PostMapping("/like/{id}")
-//    fun postLikeByPostIdUserID(@PathVariable("id") id: Long): Boolean {
+//    @PostMapping("/like/{id}/{post_id}")
+//    fun postLikeByPostIdUserID(@PathVariable("id") id: Long,
+//                               @PathVariable("post_id") postId: Long): Boolean {
 //        return false
 //    }
 //

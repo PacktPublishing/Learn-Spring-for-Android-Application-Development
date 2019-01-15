@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 
 
@@ -24,9 +25,9 @@ class SecurityConfigurer : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/profile/new").permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/", "/profile/new","/profiles").permitAll()
+//                .anyRequest()
+//                .authenticated()
                 .and()
                 .formLogin()
                 .and()
@@ -39,8 +40,13 @@ class SecurityConfigurer : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     fun configureGlobal(auth: AuthenticationManagerBuilder) {
         auth
-                .userDetailsService(customUserDetailsService)
-                .passwordEncoder(getPasswordEncoder())
+                .inMemoryAuthentication()
+                .withUser("sunnat")
+                .password(PasswordEncoderFactories.createDelegatingPasswordEncoder()
+                        .encode("12345"))
+                .roles("USER")
+//                .userDetailsService(customUserDetailsService)
+//                .passwordEncoder(getPasswordEncoder())
     }
 
     @Bean

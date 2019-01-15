@@ -29,12 +29,11 @@ class Profile : Serializable {
         this.password = password
     }
 
-    constructor(username: String, password: String, email: String, accCreatedTime: Instant,
-                firstName: String?, lastName: String?, contactNumber: String?, country: String?) {
+    constructor(username: String, password: String, email: String,
+                firstName: String?, lastName: String?, country: String?) {
         this.username = username
         this.password = password
         this.email = email
-        this.accCreatedTime = accCreatedTime
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
@@ -46,7 +45,6 @@ class Profile : Serializable {
         this.username = username
         this.password = password
         this.email = email
-        this.accCreatedTime = accCreatedTime
         this.firstName = firstName
         this.lastName = lastName
         this.contactNumber = contactNumber
@@ -68,7 +66,7 @@ class Profile : Serializable {
     var email: String? = null
 
     @JsonProperty("accCreatedTime")
-    var accCreatedTime: Instant? = Instant.now()
+    var accCreatedTime: String? = null
 
     @JsonProperty("firstName")
     var firstName: String? = null
