@@ -3,6 +3,7 @@ package com.sunnat629.clientside.repository
 import com.sunnat629.clientside.model.Post
 import com.sunnat629.clientside.model.Profile
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.*
 
 interface PostService {
@@ -15,14 +16,14 @@ interface PostService {
 
     // Submit a post
     @Headers("Content-Type: application/json")
-    @POST("/post/{id}/new")
-    fun submitNewPost(@Query("id") id: Long, @Field("text") text: String): Observable<Post>
+    @POST("/post/{profile_id}/new")
+    fun submitNewPost(@Path("profile_id") id: Long, @Query("text") text: String): Observable<List<Post>>
 
 
     // Get all posted status
     @Headers("Content-Type: application/json")
     @GET("/posts")
-    fun getPostList(): Observable<List<Post>>
+    fun getPostList(): Single<List<Post>>
 
 
     // Get all posted status by Profile ID

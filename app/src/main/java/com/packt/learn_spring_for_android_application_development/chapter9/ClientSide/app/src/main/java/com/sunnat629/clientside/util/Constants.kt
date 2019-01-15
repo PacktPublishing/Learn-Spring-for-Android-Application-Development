@@ -1,4 +1,4 @@
-package com.sunnat629.clientside
+package com.sunnat629.clientside.util
 
 object Constants {
     const val API_CONTENT_TYPE = "application/json; charset=utf-8"

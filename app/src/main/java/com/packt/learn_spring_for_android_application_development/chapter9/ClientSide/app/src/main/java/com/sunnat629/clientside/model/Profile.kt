@@ -12,4 +12,10 @@ data class Profile(
     @SerializedName("lastName") var lastName: String?,
     @SerializedName("contactNumber") var contactNumber: String?,
     @SerializedName("country") var country: String?
-    )
+    ){
+    override fun toString(): String {
+        return "Profile(userID=$userID, username=$username, password=$password, email=$email, " +
+                "accCreatedTime=$accCreatedTime, firstName=$firstName, lastName=$lastName, " +
+                "contactNumber=$contactNumber, country=$country)"
+    }
+}

@@ -1,7 +1,7 @@
 package com.sunnat629.clientside.api
 
 import com.google.gson.GsonBuilder
-import com.sunnat629.clientside.Constants
+import com.sunnat629.clientside.util.Constants
 import com.sunnat629.clientside.basicauth.BasicAuthInterceptor
 import com.sunnat629.clientside.repository.CommentService
 import com.sunnat629.clientside.repository.LikeService
@@ -14,10 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-object APIService{
-   fun getRetrofitBuilder(username:String, password:String): Retrofit {
+object APIClient{
+   fun getRetrofitBuilder(username:String?, password:String?): Retrofit {
        return Retrofit.Builder()
-           .client(getOkhttpClient(username, password))
+           .client(getOkhttpClient(username!!, password!!))
            .baseUrl(Constants.API_BASE_PATH)
            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
            .addConverterFactory(gsonConverter())
@@ -43,7 +43,7 @@ object APIService{
     }
 
     // get profile request builder
-    fun profileAPICall(username:String, password:String) = getRetrofitBuilder(username, password)
+    fun profileAPICall(username:String?, password:String?) = getRetrofitBuilder(username, password)
         .create(ProfileService::class.java)
 
     // get post request builder

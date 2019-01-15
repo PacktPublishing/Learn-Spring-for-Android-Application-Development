@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+
+    <!-- Appbar -->
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0">
+
+        <!-- Toolbar -->
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:textAppearance="?android:textAppearanceLarge"
+              android:textStyle="bold"
+              android:gravity="center_horizontal"
+              android:text="@string/title_profile" android:id="@+id/usernamePro"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+              app:layout_constraintTop_toBottomOf="@+id/appBarLayout" app:layout_constraintVertical_bias="0.0"/>
+
+    <!--full name-->
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/profileFullNameTitlePro"
+              android:textStyle="bold"
+              android:text="@string/title_full_names"
+              android:textAppearance="?android:textAppearanceSmall"
+              android:layout_marginStart="8dp"
+              app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="32dp"
+              app:layout_constraintTop_toBottomOf="@+id/usernamePro" android:layout_marginEnd="8dp"
+              app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="@tools:sample/full_names"
+              android:id="@+id/profileFullNamePro"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintTop_toTopOf="@+id/profileFullNameTitlePro"
+              app:layout_constraintBottom_toBottomOf="@+id/profileFullNameTitlePro"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="160dp"
+              app:layout_constraintVertical_bias="1.0"/>
+
+    <!--email-->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/emailTitlePro"
+              android:textStyle="bold"
+              android:text="@string/title_email"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintStart_toStartOf="@+id/profileFullNameTitlePro"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintEnd_toEndOf="@+id/profileFullNameTitlePro" app:layout_constraintHorizontal_bias="0.0"
+              android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/profileFullNameTitlePro"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="@tools:sample/last_names"
+              android:id="@+id/emailPro"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintTop_toTopOf="@+id/emailTitlePro"
+              app:layout_constraintBottom_toBottomOf="@+id/emailTitlePro" app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintStart_toStartOf="@+id/profileFullNamePro"
+              app:layout_constraintHorizontal_bias="0.0"/>
+    <!--contact number-->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/contactNumberTitlePro"
+              android:textStyle="bold"
+              android:text="@string/title_contact_number"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintStart_toStartOf="@+id/emailTitlePro"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintEnd_toEndOf="@+id/emailTitlePro" app:layout_constraintHorizontal_bias="0.0"
+              android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/emailTitlePro"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="@tools:sample/last_names"
+              android:id="@+id/contactNumberPro"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintTop_toTopOf="@+id/contactNumberTitlePro"
+              app:layout_constraintBottom_toBottomOf="@+id/contactNumberTitlePro"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintStart_toStartOf="@+id/emailPro" app:layout_constraintHorizontal_bias="0.0"/>
+    <!--country-->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/countryTitlePro"
+              android:textStyle="bold"
+              android:text="@string/title_country"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintStart_toStartOf="@+id/contactNumberTitlePro"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintEnd_toEndOf="@+id/contactNumberTitlePro" app:layout_constraintHorizontal_bias="0.0"
+              android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/contactNumberTitlePro"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="@tools:sample/last_names"
+              android:id="@+id/countryPro"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintTop_toTopOf="@+id/countryTitlePro"
+              app:layout_constraintBottom_toBottomOf="@+id/countryTitlePro" app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintStart_toStartOf="@+id/contactNumberPro" app:layout_constraintHorizontal_bias="0.0"/>
+
+    <!--created date-->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/createDataTitlePro"
+              android:textStyle="bold"
+              android:text="@string/title_created_date"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintStart_toStartOf="@+id/countryTitlePro"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintEnd_toEndOf="@+id/countryTitlePro" app:layout_constraintHorizontal_bias="0.0"
+              android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/countryTitlePro"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="@tools:sample/last_names"
+              android:id="@+id/createDataPro"
+              android:textAppearance="?android:textAppearanceSmall"
+              app:layout_constraintTop_toTopOf="@+id/createDataTitlePro"
+              app:layout_constraintBottom_toBottomOf="@+id/createDataTitlePro" app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="8dp"
+              app:layout_constraintStart_toStartOf="@+id/countryPro" app:layout_constraintHorizontal_bias="0.0"/>
+
+    <!--total post-->
+
+</android.support.constraint.ConstraintLayout>

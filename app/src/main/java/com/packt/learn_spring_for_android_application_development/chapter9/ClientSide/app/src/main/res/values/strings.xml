@@ -7,9 +7,16 @@
     <string name="title_profile">Profile</string>
     <string name="sample">
         Learn Spring for Android Application Development by S M Mohi Us Sunnat, Igor Kucherenko.\n
-        Build amazing applications with the power of Spring modules and the efficiency of Kotlin</string>
+        Build amazing applications with the power of Spring modules and the efficiency of Kotlin
+    </string>
 
     <string name="just_now">just now</string>
     <string name="minute_ago">1 min ago</string>
     <string name="minutes_ago">%d mins ago</string>
+    <string name="title_full_names">Full Name</string>
+    <string name="title_email">Email</string>
+    <string name="title_contact_number">Contact Number</string>
+    <string name="title_country">Country</string>
+    <string name="title_created_date">Created Date</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
