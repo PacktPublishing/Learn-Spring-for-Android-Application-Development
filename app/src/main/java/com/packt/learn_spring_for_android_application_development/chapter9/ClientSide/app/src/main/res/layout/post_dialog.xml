@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="8dp"
+              android:layout_margin="8dp">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView android:id="@+id/dialog_title"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="sans-serif-medium"
+              android:lineSpacingExtra="8sp"
+              android:padding="8dp"
+
+              android:text="@string/lbl_new_post_title"
+              android:textColor="@color/colorAccent"
+              android:textAppearance="?android:textAppearanceSmall"
+              android:textStyle="normal"/>
+
+    <EditText
+            android:id="@+id/post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:hint="@string/hint_enter_post"
+            android:inputType="textCapSentences|textMultiLine"
+            android:lines="4"/>
+
+</LinearLayout>

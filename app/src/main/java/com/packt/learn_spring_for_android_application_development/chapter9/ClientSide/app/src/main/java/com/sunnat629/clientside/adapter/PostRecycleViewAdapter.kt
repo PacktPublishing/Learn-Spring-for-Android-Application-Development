@@ -11,9 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.sunnat629.clientside.R
 import com.sunnat629.clientside.model.Post
+import com.sunnat629.clientside.util.Constants.TIME_FORMAT
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.util.*
 
 class PostRecycleViewAdapter(private var context: Context,
                              private var postList: List<Post>
@@ -49,10 +48,9 @@ class PostRecycleViewAdapter(private var context: Context,
 //        val formatter = SimpleDateFormat("dd MM yyyy HH:mm:ss")
 //        val formattedDate = formatter.format(time)
 
-
         viewHolder.profileFullName.text = "${userDetails.profile!!.firstName} ${userDetails.profile!!.lastName} "
         viewHolder.username.text = userDetails.profile!!.username
-        viewHolder.postedDate.text = userDetails.postCreatedTime!!
+        viewHolder.postedDate.text = SimpleDateFormat(TIME_FORMAT).format(userDetails.postCreatedTime!!)
         viewHolder.postText.text = userDetails.text
 
         viewHolder.postRoot.setOnClickListener {

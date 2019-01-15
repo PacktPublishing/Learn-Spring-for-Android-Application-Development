@@ -49,12 +49,12 @@
                       android:layout_marginTop="4dp"
                       app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="4dp"/>
 
-            <ImageView android:layout_width="10dp" android:layout_height="10dp"
+  <!--          <ImageView android:layout_width="10dp" android:layout_height="10dp"
                        android:src="@drawable/post_menu_24dp"
                        android:id="@+id/postMenu"
                        app:layout_constraintEnd_toEndOf="parent"
                        app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"
-                       android:layout_marginEnd="4dp"/>
+                       android:layout_marginEnd="4dp"/>-->
         </android.support.constraint.ConstraintLayout>
 
         <TextView android:layout_width="0dp" android:layout_height="wrap_content"

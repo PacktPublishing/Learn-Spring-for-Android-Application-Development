@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Mini Adda</string>
     <string name="user_title">User Name List</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_profile">Profile</string>
     <string name="sample">
         Learn Spring for Android Application Development by S M Mohi Us Sunnat, Igor Kucherenko.\n
@@ -19,4 +17,12 @@
     <string name="title_country">Country</string>
     <string name="title_created_date">Created Date</string>
     <string name="title_activity_main2">Main2Activity</string>
+
+
+
+    <string name="dialog_title_post">Notes</string>
+    <string name="msg_no_post">No post found!</string>
+    <string name="lbl_new_post_title">New Post</string>
+    <string name="lbl_edit_post_title">Edit Post</string>
+    <string name="hint_enter_post">Enter your post!</string>
 </resources>

@@ -25,7 +25,7 @@ interface ProfileService {
 
    // Get Profile by ID
     @GET("/profile/{userId}")
-    fun getUserById(@Query("userId") userId: Long): Observable<Profile>
+    fun getUserById(@Path("userId") userId: Long): Observable<Profile>
 
     //     Update Profile by ID
     @PUT("/profile/{userId}")

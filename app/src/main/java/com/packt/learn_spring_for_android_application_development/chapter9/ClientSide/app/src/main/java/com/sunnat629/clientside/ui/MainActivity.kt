@@ -1,13 +1,22 @@
 package com.sunnat629.clientside.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import com.sunnat629.clientside.R
 import com.sunnat629.clientside.adapter.PostRecycleViewAdapter
 import com.sunnat629.clientside.api.APIClient
@@ -15,6 +24,7 @@ import com.sunnat629.clientside.model.Post
 import com.sunnat629.clientside.model.Profile
 import com.sunnat629.clientside.repository.UserService
 import com.sunnat629.clientside.repository.UserServiceImpl
+import com.sunnat629.clientside.util.PrefUtils
 import com.sunnat629.clientside.util.UtilMethods
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -35,29 +45,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setTitleName()
 
+        PrefUtils.storeUsernameID(this, 1)
+        PrefUtils.storeUsername(this, username)
+        PrefUtils.storePassword(this, password)
+
 
         fabMain.setOnClickListener { view ->
-            submitPost()
+            showNoteDialog(false, null, -1)
+
             Snackbar.make(view, "Post Submitted!!!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
-        println("${postList.size}")
-        val mLayoutManager = LinearLayoutManager(this)
-        displayList.layoutManager = mLayoutManager
+        displayList.layoutManager = LinearLayoutManager(this)
         displayList.setHasFixedSize(true)
         postRecycleViewAdapter = PostRecycleViewAdapter(this, postList)
         displayList.adapter = postRecycleViewAdapter
 
-
-
-//        val userService: UserService = UserServiceImpl().getUserServiceImplImpl(username,password)
-//        getUserList(userService)
-//        val profileService: ProfileService = APIClient.getProfileServiceImplImpl(username,password)
-//        profileAPICall(1)
-//        getAllPosts()
-        registerUser()
         getAllPosts()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.profileMenu -> {
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return true
     }
 
     @SuppressLint("CheckResult")
@@ -84,82 +106,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("CheckResult")
-    private fun getUserList(userService: UserService) {
-        if(UtilMethods.isConnectedToInternet(this)){
-
-            val observable = UserServiceImpl()
-                .getUserServiceImplImpl(username,password).getUserList()
-
-            observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    userList -> println(userList[0].email)
-
-                },{
-                    error -> println(error.message)
-                })
-
-
-
-//            val call: Call<List<UserModel>> = userService.getUserList()
-//            call.enqueue(object: Callback<List<UserModel>> {
-//                override fun onFailure(call: Call<List<UserModel>>, t: Throwable) {
-//                    Log.e("PACKTPUB", t.message)
-//                    UtilMethods.hideLoading()
-//                    UtilMethods.showLongToast(this@MainActivity, "Internet Nai")
-//                }
-//
-//                override fun onResponse(call: Call<List<UserModel>>, response: Response<List<UserModel>>) {
-////                displayList.text = response.body().toString()
-//                    UtilMethods.hideLoading()
-//
-//                    val adapter = UserListAdapter(this@MainActivity, response.body())
-//                    displayList.adapter = adapter
-//                }
-//            })
-
-        }else{
-            UtilMethods.showLongToast(this, "No Internet Connection!")
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    private fun userApiCall(userID: Int){
-        if(UtilMethods.isConnectedToInternet(this)){
-            UtilMethods.showLoading(this)
-            val observable = APIClient
-                .profileAPICall(username,password)
-                .getUserList()
-//                .getProfileServiceImplImpl()
-//                .getTest()
-            observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userResponse ->
-                    UtilMethods.hideLoading()
-
-//                    val adapter = UserListAdapter(this@MainActivity, userResponse)
-//                    displayList.adapter = adapter
-
-                    Log.i("******", userResponse[0].email)
-
-                    /** userResponse is response data class*/
-
-                }, { error ->
-                    UtilMethods.hideLoading()
-                    Log.wtf("******", error.message.toString())
-
-                    UtilMethods.showLongToast(this, error.message.toString())
-                }
-                )
-        }else{
-            UtilMethods.showLongToast(this, "No Internet Connection!")
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    private fun submitPost(){
+    private fun submitPost(id: Long, text: String){
         APIClient.postAPICall(username,password)
-            .submitNewPost(1, "THISASDSA D")
+            .submitNewPost(id, text)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -177,28 +126,53 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    @SuppressLint("CheckResult")
-    private fun registerUser(){
-        val newProfile = Profile(null, "sunnat629", "123456", "s@gmail.com",
-            null, "Mohi Us", "Sunnat", "123456789", "Bangladesh")
-            APIClient.profileAPICall(username,password)
-                .registerProfile(newProfile)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                        postList ->
-                    Log.wtf("******", postList.toString())
-                },{
-                        error ->
-                    UtilMethods.hideLoading()
-                    Log.wtf("******", error.message.toString())
-
-                })
-    }
-
     private fun setTitleName() {
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
+    }
+
+    private fun showNoteDialog(shouldUpdate: Boolean, post: Post?, position: Int) {
+        val layoutInflaterAndroid = LayoutInflater.from(applicationContext)
+        val view = layoutInflaterAndroid.inflate(R.layout.post_dialog, null)
+
+        val alertDialogBuilderUserInput = AlertDialog.Builder(this@MainActivity)
+        alertDialogBuilderUserInput.setView(view)
+
+        val inputNote = view.findViewById(R.id.post) as EditText
+        val dialogTitle = view.findViewById(R.id.dialog_title) as TextView
+        dialogTitle.text = if (!shouldUpdate) getString(R.string.lbl_new_post_title) else getString(R.string.lbl_edit_post_title)
+
+        if (shouldUpdate && post != null) {
+            inputNote.setText(post.text)
+        }
+        alertDialogBuilderUserInput
+            .setCancelable(false)
+            .setPositiveButton(if (shouldUpdate) "update" else "save"
+            ) { _, _ -> }
+            .setNegativeButton("cancel"
+            ) { dialogBox, _ -> dialogBox.cancel() }
+
+        val alertDialog = alertDialogBuilderUserInput.create()
+        alertDialog.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(View.OnClickListener {
+            // Show toast message when no text is entered
+            if (TextUtils.isEmpty(inputNote.getText().toString())) {
+                Toast.makeText(this@MainActivity, "Enter post!", Toast.LENGTH_SHORT).show()
+                return@OnClickListener
+            } else {
+                alertDialog.dismiss()
+            }
+
+            // check if user updating post
+            if (shouldUpdate && post != null) {
+                // update post by it's id
+//                updateNote(post!!.getId(), inputNote.text.toString(), position)
+            } else {
+                // create new post
+                submitPost(1, inputNote.text.toString())
+            }
+        })
     }
 }

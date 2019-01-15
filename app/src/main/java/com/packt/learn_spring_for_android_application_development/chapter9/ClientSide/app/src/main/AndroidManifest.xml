@@ -31,12 +31,7 @@
         <!-- </activity> -->
         <activity
                 android:name=".ui.ProfileActivity"
-                android:label="@string/title_activity_home"
-                android:theme="@style/AppTheme">
-        </activity>
-        <activity
-                android:name=".Main2Activity"
-                android:label="@string/title_activity_main2"
+                android:label="@string/title_activity_profile"
                 android:theme="@style/AppTheme">
         </activity>
     </application>
