@@ -15,6 +15,7 @@ data class Profile(
 ){
     // This will return if you use a taker username
     @SerializedName("duplicate") var duplicate: String? = null
+    @SerializedName("error") var error: String? = null
 
     override fun toString(): String {
         return "Profile(userID=$userID, username=$username, password=$password, email=$email, " +

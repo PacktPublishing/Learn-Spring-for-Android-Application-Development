@@ -15,13 +15,21 @@ import java.util.concurrent.TimeUnit
 
 
 object APIClient{
-   fun getRetrofitBuilder(username:String?, password:String?): Retrofit {
-       return Retrofit.Builder()
-           .client(getOkhttpClient(username!!, password!!))
-           .baseUrl(Constants.API_BASE_PATH)
-           .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-           .addConverterFactory(gsonConverter())
-           .build()
+    fun getRetrofitBuilder(username:String?, password:String?): Retrofit {
+        return Retrofit.Builder()
+            .client(getOkhttpClient(username!!, password!!))
+            .baseUrl(Constants.API_BASE_PATH)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(gsonConverter())
+            .build()
+    }
+    fun getRetrofitBuilder(): Retrofit {
+        return Retrofit.Builder()
+            .client(getOkhttpClient())
+            .baseUrl(Constants.API_BASE_PATH)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(gsonConverter())
+            .build()
     }
 
     fun gsonConverter(): GsonConverterFactory {
@@ -42,8 +50,19 @@ object APIClient{
             .build()
     }
 
+    fun getOkhttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .build()
+    }
+
     // get profile request builder
     fun profileAPICall(username:String?, password:String?) = getRetrofitBuilder(username, password)
+        .create(ProfileService::class.java)
+
+    // get profile request builder
+    fun newProfileAPICall() = getRetrofitBuilder()
         .create(ProfileService::class.java)
 
     // get post request builder

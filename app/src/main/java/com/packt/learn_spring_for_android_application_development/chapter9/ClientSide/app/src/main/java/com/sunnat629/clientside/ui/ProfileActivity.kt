@@ -13,7 +13,6 @@ import com.sunnat629.clientside.R
 import com.sunnat629.clientside.api.APIClient
 import com.sunnat629.clientside.model.Profile
 import com.sunnat629.clientside.util.PrefUtils
-import com.sunnat629.clientside.util.UtilMethods
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -27,49 +26,11 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         setTitleName()
-        registerUser()
 
         username = PrefUtils.getUsername(this)!!
         password = PrefUtils.getPassword(this)!!
         Log.wtf("*********", "${PrefUtils.getUsernameID(this)} $username $password")
         getUser()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            R.id.profileMenu -> {
-                val intent = Intent(this, ProfileActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-        }
-        return true
-    }
-    @SuppressLint("CheckResult")
-    private fun registerUser(){
-        val newProfile = Profile(null, "sunnat629", "123456", "s@gmail.com",
-            null, "Mohi Us", "Sunnat", "123456789", "Bangladesh")
-        APIClient.profileAPICall(username,password)
-            .registerProfile(newProfile)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                    newUser ->
-                Log.wtf("******", newUser.duplicate!!)
-
-
-            },{
-                    error ->
-                UtilMethods.hideLoading()
-                Log.wtf("******", error.message.toString())
-
-            })
     }
 
     @SuppressLint("CheckResult")
@@ -88,7 +49,6 @@ class ProfileActivity : AppCompatActivity() {
                 countryPro.text = myUser.country
             },{
                     error ->
-                UtilMethods.hideLoading()
                 Log.wtf("******", error.message.toString())
 
             })

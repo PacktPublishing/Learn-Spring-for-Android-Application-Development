@@ -21,9 +21,6 @@ import com.sunnat629.clientside.R
 import com.sunnat629.clientside.adapter.PostRecycleViewAdapter
 import com.sunnat629.clientside.api.APIClient
 import com.sunnat629.clientside.model.Post
-import com.sunnat629.clientside.model.Profile
-import com.sunnat629.clientside.repository.UserService
-import com.sunnat629.clientside.repository.UserServiceImpl
 import com.sunnat629.clientside.util.PrefUtils
 import com.sunnat629.clientside.util.UtilMethods
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,8 +31,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var username = "sunnat"
-    var password = "12345"
     private val disposable = CompositeDisposable()
     private lateinit var postRecycleViewAdapter: PostRecycleViewAdapter
     private var postList: List<Post> = listOf()
@@ -45,9 +40,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setTitleName()
 
-        PrefUtils.storeUsernameID(this, 1)
-        PrefUtils.storeUsername(this, username)
-        PrefUtils.storePassword(this, password)
 
 
         fabMain.setOnClickListener { view ->
@@ -61,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         displayList.setHasFixedSize(true)
         postRecycleViewAdapter = PostRecycleViewAdapter(this, postList)
         displayList.adapter = postRecycleViewAdapter
+
 
         getAllPosts()
     }
@@ -85,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     private fun getAllPosts() {
         disposable.add(
-            APIClient.postAPICall(username,password)
+            APIClient.postAPICall(PrefUtils.getUsername(this)!!, PrefUtils.getPassword(this)!!)
             .getPostList()
                 .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -107,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     private fun submitPost(id: Long, text: String){
-        APIClient.postAPICall(username,password)
+        APIClient.postAPICall(PrefUtils.getUsername(this)!!, PrefUtils.getPassword(this)!!)
             .submitNewPost(id, text)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
