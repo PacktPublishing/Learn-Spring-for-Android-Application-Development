@@ -2,6 +2,7 @@ package com.sunnat629.clientside.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.sunnat629.clientside.R
 import com.sunnat629.clientside.model.Post
+import com.sunnat629.clientside.ui.PostDetailsActivity
 import com.sunnat629.clientside.util.Constants.TIME_FORMAT
 import java.text.SimpleDateFormat
 
@@ -34,29 +36,24 @@ class PostRecycleViewAdapter(private var context: Context,
         this.postList = postList
     }
 
-    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        val userDetails = postList[position]
+        val postDetails = postList[position]
 
-
-//        val time: Instant = Instant.parse(userDetails.postCreatedTime!!)
-////        val myDate = Date.from(time)
-//        val formatter = SimpleDateFormat("dd MM yyyy HH:mm:ss")
-//        val formattedDate = formatter.format(time)
-
-        viewHolder.profileFullName.text = "${userDetails.profile!!.firstName} ${userDetails.profile!!.lastName} "
-        viewHolder.username.text = userDetails.profile!!.username
-        viewHolder.postedDate.text = SimpleDateFormat(TIME_FORMAT).format(userDetails.postCreatedTime!!)
-        viewHolder.postText.text = userDetails.text
+        viewHolder.profileFullName.text = "${postDetails.profile!!.firstName} ${postDetails.profile!!.lastName} "
+        viewHolder.username.text = postDetails.profile!!.username
+        viewHolder.postedDate.text = SimpleDateFormat(TIME_FORMAT).format(postDetails.postCreatedTime!!)
+        viewHolder.postText.text = postDetails.text
 
         viewHolder.postRoot.setOnClickListener {
-            Toast.makeText(context, userDetails.profile!!.username, Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, PostDetailsActivity::class.java)
+            intent.putExtra("postId", postDetails.postId)
+            context.startActivity(intent)
         }
     }
+
+
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){

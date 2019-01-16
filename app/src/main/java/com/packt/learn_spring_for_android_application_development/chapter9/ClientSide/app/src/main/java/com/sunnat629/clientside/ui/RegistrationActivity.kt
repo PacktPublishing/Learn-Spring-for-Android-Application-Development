@@ -23,8 +23,6 @@ import kotlinx.android.synthetic.main.activity_registration.*
 class RegistrationActivity : AppCompatActivity() {
 
 
-    private var username: String = ""
-    private var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +32,12 @@ class RegistrationActivity : AppCompatActivity() {
         reg_submit.setOnClickListener {
             submitForm()
         }
-        registerUser()
 
         already_reg.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
+            finish()
         }
     }
 

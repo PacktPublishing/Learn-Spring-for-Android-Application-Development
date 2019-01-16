@@ -22,20 +22,8 @@ interface ProfileService {
     @GET("/profile/login")
     fun loginProfile(@Query("username") username: String, @Query("password") password: String): Observable<Profile>
 
-    // Get All Profiles
-    @Headers("Content-Type: application/json")
-    @GET("/profiles")
-    fun getUserList(): Observable<List<Profile>>
-
    // Get Profile by ID
     @GET("/profile/{userId}")
     fun getUserById(@Path("userId") userId: Long): Observable<Profile>
 
-    //     Update Profile by ID
-    @PUT("/profile/{userId}")
-    fun updateUserById(@Query("userId") userId: Long, @Body mUser: Profile): Observable<Profile>
-
-    // Delete Profile by ID
-    @DELETE("/profile/{userId}")
-    fun deleteUserById(@Query("userId") userId: Long): Any
 }

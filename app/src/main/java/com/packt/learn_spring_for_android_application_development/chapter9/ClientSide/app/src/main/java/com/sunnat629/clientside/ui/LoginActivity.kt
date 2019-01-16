@@ -19,9 +19,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        logInUser(true)
        setUsernamePassword()
         login_submit.setOnClickListener {
-            logInUser()
+            logInUser(false)
         }
         need_reg.setOnClickListener {
             val intent = Intent(this, RegistrationActivity::class.java)
@@ -41,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     @SuppressLint("CheckResult")
-    private fun logInUser(){
+    private fun logInUser(auto: Boolean){
 
         APIClient.profileAPICall(username_input_login.text.toString(), password_input_login.text.toString())
             .loginProfile(username_input_login.text.toString(),password_input_login.text.toString() )
@@ -61,12 +62,13 @@ class LoginActivity : AppCompatActivity() {
                     password_input_login.setText(PrefUtils.getPassword(this))
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
 
 
             },{
                     error ->
-                Toast.makeText(applicationContext,R.string.err_login_msg, Toast.LENGTH_SHORT).show()
+                if (auto)Toast.makeText(applicationContext,R.string.err_login_msg, Toast.LENGTH_SHORT).show()
                 Log.wtf("******", error.message.toString())
 
             })

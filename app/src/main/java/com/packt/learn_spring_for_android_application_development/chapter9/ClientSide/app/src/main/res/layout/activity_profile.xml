@@ -3,7 +3,6 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
-                                             android:theme="@style/AppTheme"
                                              android:layout_height="match_parent">
 
 
@@ -21,8 +20,9 @@
         <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
+
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"/>
+                android:background="@color/colorAccentBlueDark"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -30,7 +30,7 @@
               android:textAppearance="?android:textAppearanceLarge"
               android:textStyle="bold"
               android:gravity="center_horizontal"
-              android:text="@string/title_profile" android:id="@+id/usernamePro"
+              android:text="@string/title_username" android:id="@+id/usernamePro"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"

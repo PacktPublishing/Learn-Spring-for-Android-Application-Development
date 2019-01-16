@@ -29,22 +29,5 @@ interface PostService {
     // Get all posted status by Profile ID
     @Headers("Content-Type: application/json")
     @GET("/post/{id}")
-    fun getPostById(
-        @Query("id") id: Long
-    ): Observable<Post>
-
-
-    // Update all posted status by Profile ID
-    @Headers("Content-Type: application/json")
-    @PUT("/post/{profile_id}")
-    fun updatePostById(
-        @Query("profile_id") id: Long,
-        @Field("text") text: String
-    ): Observable<Post>
-
-
-    // Delete a posted status by Profile ID
-    @Headers("Content-Type: application/json")
-    @DELETE("/post/{id}")
-    fun deletePostByUserId(@Query("id") id: Long): Any
+    fun getPostById(@Path("id") id: Long): Observable<Post>
 }

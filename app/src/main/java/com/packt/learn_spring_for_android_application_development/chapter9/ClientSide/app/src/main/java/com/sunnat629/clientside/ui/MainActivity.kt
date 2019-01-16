@@ -3,7 +3,6 @@ package com.sunnat629.clientside.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -15,7 +14,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import com.sunnat629.clientside.R
 import com.sunnat629.clientside.adapter.PostRecycleViewAdapter
@@ -40,20 +38,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setTitleName()
 
-
-
-        fabMain.setOnClickListener { view ->
-            showNoteDialog(false, null, -1)
-
-            Snackbar.make(view, "Post Submitted!!!", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fabMain.setOnClickListener {
+            showNoteDialog()
         }
 
         displayList.layoutManager = LinearLayoutManager(this)
         displayList.setHasFixedSize(true)
         postRecycleViewAdapter = PostRecycleViewAdapter(this, postList)
         displayList.adapter = postRecycleViewAdapter
-
 
         getAllPosts()
     }
@@ -69,7 +61,9 @@ class MainActivity : AppCompatActivity() {
             R.id.profileMenu -> {
                 val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)
-                return true
+            }
+            R.id.postUpdate -> {
+                getAllPosts()
             }
         }
         return true
@@ -77,6 +71,8 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     private fun getAllPosts() {
+        UtilMethods.showLoading(this)
+
         disposable.add(
             APIClient.postAPICall(PrefUtils.getUsername(this)!!, PrefUtils.getPassword(this)!!)
             .getPostList()
@@ -84,39 +80,48 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 newPostList ->
-                postList = newPostList
-
                 postRecycleViewAdapter.setItems(newPostList)
                 postRecycleViewAdapter.notifyDataSetChanged()
+                UtilMethods.hideLoading()
+                toggleEmptyNotes(newPostList.isNotEmpty())
 
             },{
                     error ->
                 UtilMethods.hideLoading()
                 Log.wtf("******", error.message.toString())
-
+                Toast.makeText(applicationContext, error.message.toString(), Toast.LENGTH_SHORT).show()
             })
         )
     }
 
     @SuppressLint("CheckResult")
     private fun submitPost(id: Long, text: String){
+        UtilMethods.showLoading(this)
         APIClient.postAPICall(PrefUtils.getUsername(this)!!, PrefUtils.getPassword(this)!!)
             .submitNewPost(id, text)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                     newPostList ->
-                postList = newPostList
-
                 postRecycleViewAdapter.setItems(newPostList)
                 postRecycleViewAdapter.notifyDataSetChanged()
+                UtilMethods.hideLoading()
+                toggleEmptyNotes(newPostList.isNotEmpty())
 
             },{
                     error ->
                 UtilMethods.hideLoading()
                 Log.wtf("******", error.message.toString())
-
+                Toast.makeText(applicationContext, error.message.toString(), Toast.LENGTH_SHORT).show()
             })
+    }
+
+    private fun toggleEmptyNotes(notEmpty: Boolean) {
+        if (notEmpty) {
+            txt_empty_notes_view.visibility = View.GONE
+        } else {
+            txt_empty_notes_view.visibility = View.VISIBLE
+        }
     }
 
     private fun setTitleName() {
@@ -125,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
-    private fun showNoteDialog(shouldUpdate: Boolean, post: Post?, position: Int) {
+    private fun showNoteDialog() {
         val layoutInflaterAndroid = LayoutInflater.from(applicationContext)
         val view = layoutInflaterAndroid.inflate(R.layout.post_dialog, null)
 
@@ -133,38 +138,23 @@ class MainActivity : AppCompatActivity() {
         alertDialogBuilderUserInput.setView(view)
 
         val inputNote = view.findViewById(R.id.post) as EditText
-        val dialogTitle = view.findViewById(R.id.dialog_title) as TextView
-        dialogTitle.text = if (!shouldUpdate) getString(R.string.lbl_new_post_title) else getString(R.string.lbl_edit_post_title)
 
-        if (shouldUpdate && post != null) {
-            inputNote.setText(post.text)
-        }
         alertDialogBuilderUserInput
             .setCancelable(false)
-            .setPositiveButton(if (shouldUpdate) "update" else "save"
-            ) { _, _ -> }
-            .setNegativeButton("cancel"
-            ) { dialogBox, _ -> dialogBox.cancel() }
+            .setPositiveButton( "Post") { _, _ -> }
+            .setNegativeButton("cancel") { dialogBox, _ -> dialogBox.cancel() }
 
         val alertDialog = alertDialogBuilderUserInput.create()
         alertDialog.show()
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(View.OnClickListener {
             // Show toast message when no text is entered
-            if (TextUtils.isEmpty(inputNote.getText().toString())) {
+            if (TextUtils.isEmpty(inputNote.text.toString())) {
                 Toast.makeText(this@MainActivity, "Enter post!", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             } else {
+                submitPost(PrefUtils.getUsernameID(this)!!, inputNote.text.toString())
                 alertDialog.dismiss()
-            }
-
-            // check if user updating post
-            if (shouldUpdate && post != null) {
-                // update post by it's id
-//                updateNote(post!!.getId(), inputNote.text.toString(), position)
-            } else {
-                // create new post
-                submitPost(1, inputNote.text.toString())
             }
         })
     }

@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             app:srcCompat="@drawable/ic_face_white_24dp"
-            app:backgroundTint="@color/colorAccent"
+            app:backgroundTint="@color/colorAccentBlueDark"
             app:fabSize="normal"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"

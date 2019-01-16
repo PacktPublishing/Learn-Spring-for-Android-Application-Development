@@ -6,4 +6,10 @@
             app:showAsAction="always"
             android:title="@string/title_profile">
     </item>
+    <item
+            android:id="@+id/postUpdate"
+            android:icon="@drawable/ic_autorenew_white_24dp"
+            app:showAsAction="always"
+            android:title="@string/title_update">
+    </item>
 </menu>

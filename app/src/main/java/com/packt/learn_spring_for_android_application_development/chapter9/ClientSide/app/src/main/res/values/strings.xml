@@ -2,6 +2,7 @@
     <string name="app_name">Mini Adda</string>
     <string name="user_title">User Name List</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_post_details">Post Details</string>
     <string name="title_profile">Profile</string>
     <string name="sample">
         Learn Spring for Android Application Development by S M Mohi Us Sunnat, Igor Kucherenko.\n
@@ -20,8 +21,8 @@
 
 
     <string name="dialog_title_post">Notes</string>
-    <string name="msg_no_post">No post found!</string>
     <string name="lbl_new_post_title">New Post</string>
+    <string name="lbl_new_comment_title">New Comment</string>
     <string name="lbl_edit_post_title">Edit Post</string>
     <string name="hint_enter_post">Enter your post!</string>
     <string name="title_password">Password</string>
@@ -38,8 +39,12 @@
     <string name="err_msg_password">Enter the password</string>
     <string name="err_match_password">Password does not match</string>
     <string name="err_login_msg">Wrong username or password. Please Try again</string>
+    <string name="msg_no_post">No post found!</string>
+
     <string name="title_register">Register</string>
     <string name="title_login">LogIn</string>
     <string name="title_new_member">New Member?</string>
+    <string name="loading">Loading…</string>
+    <string name="title_update">Update</string>
 
 </resources>

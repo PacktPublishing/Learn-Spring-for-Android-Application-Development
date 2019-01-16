@@ -56,7 +56,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setTitleName() {
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        toolbar.title = getString(R.string.app_name)
+        toolbar.title = getString(R.string.title_profile)
         setSupportActionBar(toolbar)
     }
 

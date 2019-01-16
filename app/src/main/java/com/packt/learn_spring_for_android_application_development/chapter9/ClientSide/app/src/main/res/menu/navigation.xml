@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/navigation_profile"
-            android:icon="@drawable/ic_face_black_24dp"
-            android:title="@string/title_profile"/>
+            android:id="@+id/postedDateSingle"
+            android:icon="@drawable/ic_autorenew_white_24dp"
+            app:showAsAction="always"
+            android:title="@string/title_update">
+    </item>
 </menu>

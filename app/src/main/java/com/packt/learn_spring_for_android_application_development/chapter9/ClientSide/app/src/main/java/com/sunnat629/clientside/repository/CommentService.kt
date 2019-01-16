@@ -2,10 +2,7 @@ package com.sunnat629.clientside.repository
 
 import com.sunnat629.clientside.model.Post
 import io.reactivex.Observable
-import retrofit2.http.DELETE
-import retrofit2.http.Field
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface CommentService {
 
@@ -15,8 +12,8 @@ interface CommentService {
 
     // Post comment in a post by Profile ID and Post ID
     @POST("/comment/{user_id}/{post_id}")
-    fun postCommentByPostId(@Query("post_id") postId: Long, @Query("user_id") userId: Long,
-                            @Field("") commentText: String): Observable<Post>
+    fun postCommentByPostId(@Path("post_id") postId: Long, @Path("user_id") userId: Long,
+                            @Query("commentText") commentText: String): Observable<Post>
 
     // delete comment List of a status
     @DELETE("/comment/{id}")

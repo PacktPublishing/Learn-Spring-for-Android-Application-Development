@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import com.sunnat629.clientside.util.Constants
 import com.sunnat629.clientside.basicauth.BasicAuthInterceptor
 import com.sunnat629.clientside.repository.CommentService
-import com.sunnat629.clientside.repository.LikeService
 import com.sunnat629.clientside.repository.PostService
 import com.sunnat629.clientside.repository.ProfileService
 import okhttp3.OkHttpClient
@@ -72,9 +71,4 @@ object APIClient{
     // get comment request builder
     fun commentAPICall(username:String, password:String) = getRetrofitBuilder(username, password)
         .create(CommentService::class.java)
-
-    // get like request builder
-    fun likeAPICall(username:String, password:String) = getRetrofitBuilder(username, password)
-        .create(LikeService::class.java)
-
 }
