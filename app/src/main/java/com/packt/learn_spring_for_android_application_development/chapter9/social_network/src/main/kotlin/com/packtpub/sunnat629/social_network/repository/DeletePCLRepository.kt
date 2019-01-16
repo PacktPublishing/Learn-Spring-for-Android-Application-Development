@@ -18,12 +18,8 @@ class DeletePCLRepository : DeletePCLByIDInterface {
     override fun deleteAllUsersInfoByUserID(userID: Long): Any {
 
         val deletePosts = "SELECT FROM post WHERE profile_id = ?;"
-//        val deleteComments = "DELETE FROM comment WHERE profile_id = ?"
-//        val deleteLikes = "DELETE FROM like_obj WHERE profile_id = ?"
 
         jdbcTemplate.queryForObject(deletePosts, Post::class.java, userID)
-//        jdbcTemplate.update(deleteComments, userID)
-//        jdbcTemplate.update(deleteLikes, userID)
 
         return "DONE"
     }

@@ -26,8 +26,8 @@ class SecurityConfigurer : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/profile/new","/profiles").permitAll()
-//                .anyRequest()
-//                .authenticated()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .formLogin()
                 .and()
@@ -40,13 +40,8 @@ class SecurityConfigurer : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     fun configureGlobal(auth: AuthenticationManagerBuilder) {
         auth
-                .inMemoryAuthentication()
-                .withUser("sunnat")
-                .password(PasswordEncoderFactories.createDelegatingPasswordEncoder()
-                        .encode("12345"))
-                .roles("USER")
-//                .userDetailsService(customUserDetailsService)
-//                .passwordEncoder(getPasswordEncoder())
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(getPasswordEncoder())
     }
 
     @Bean

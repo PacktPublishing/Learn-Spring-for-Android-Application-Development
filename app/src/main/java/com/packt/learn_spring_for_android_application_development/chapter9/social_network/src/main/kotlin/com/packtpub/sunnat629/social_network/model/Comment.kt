@@ -23,7 +23,7 @@ class Comment(text: String, postedBy: Profile) : Serializable {
 
     @ManyToOne
     @JoinColumn(name = "profile_id")
-    @JsonIgnoreProperties(/*"username",*/"password","email","accCreatedTime","firstName","lastName",
+    @JsonIgnoreProperties(/*"username",*/"password","email","accCreatedTime",/*"firstName","lastName",*/
             "contactNumber","dob","city","country")
     var postedBy: Profile? = postedBy
 

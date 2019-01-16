@@ -34,6 +34,9 @@ class AppController {
     @Autowired
     private lateinit var deletePCLRepository: DeletePCLRepository
 
+ @Autowired
+    private lateinit var userLogInRepository: UserLogInRepository
+
 
     @GetMapping("/")
     fun getTest(): Any {
@@ -59,8 +62,15 @@ class AppController {
 
     // Get All Profiles
     @GetMapping("/profiles")
-    fun getUserById(): Any {
+    fun getUserPassword(): Any {
         return profileRepository.findAll()
+    }
+
+    // logInCheck
+    @GetMapping("/profile/login")
+    fun logInCheck(@RequestParam username: String, @RequestParam password: String): Any? {
+        println("**************** $username $password")
+        return userLogInRepository.logInCheck(username, password)
     }
 
 
@@ -86,12 +96,7 @@ class AppController {
     // Post status by Profile ID
     @PostMapping("/post/{profile_id}/new")
     fun submitPost(@PathVariable("profile_id") profile_id: Long, @RequestParam text: String): Any {
-//        val mPost: Post? = null
-//        mPost!!.text = text
-//        mPost.postedBy = Profile(profile_id)
-//        mPost.postCreatedTime = mPost.postCreatedTime
 
-//        postRepository.save(mPost)
         val mPost = Post(text, Profile(profile_id))
         postRepository.save(mPost)
 
@@ -142,13 +147,6 @@ class AppController {
         }
     }
 
-//    // get comment List of a post
-//    @GetMapping("/comment/{id}")
-//    fun getCommentListByPostId(@PathVariable("id") id: Long, @RequestParam text: String): Any {
-//        val modifiedComment = commentRepository.getOne(id)
-//        modifiedComment.text = text
-//        return commentRepository.save(modifiedComment)
-//    }
 
     // delete comment List of a status
     @DeleteMapping("/comment/{id}")
@@ -156,19 +154,6 @@ class AppController {
         return commentRepository.findById(id)
     }
 
-
-//    // post a like in a status
-//    @PostMapping("/like/{id}/{post_id}")
-//    fun postLikeByPostIdUserID(@PathVariable("id") id: Long,
-//                               @PathVariable("post_id") postId: Long): Boolean {
-//        return false
-//    }
-//
-//    // remove a like from a status
-//    @GetMapping("/like/{id}")
-//    fun deleteLikeByPostIdUserID(@PathVariable("id") id: Long): Boolean {
-//        return false
-//    }
 
 
 }
