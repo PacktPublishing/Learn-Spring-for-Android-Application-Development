@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 class MVCKotlinAppController {
-    @RequestMapping("/welcome")
+    @RequestMapping("/SpringMVCKotlin")
     fun greetingMessage(): ModelAndView {
         val message =
                 "<h3>Welcome to Learn Spring for Android Application Development</h3>"
