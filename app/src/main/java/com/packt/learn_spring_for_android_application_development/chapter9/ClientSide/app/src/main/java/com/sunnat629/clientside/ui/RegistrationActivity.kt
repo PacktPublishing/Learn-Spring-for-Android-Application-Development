@@ -85,6 +85,7 @@ class RegistrationActivity : AppCompatActivity() {
                     PrefUtils.storePassword(this, newUser.password!!)
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
 
 

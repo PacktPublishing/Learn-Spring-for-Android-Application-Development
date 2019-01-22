@@ -19,7 +19,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        logInUser(true)
        setUsernamePassword()
         login_submit.setOnClickListener {
             logInUser(false)
