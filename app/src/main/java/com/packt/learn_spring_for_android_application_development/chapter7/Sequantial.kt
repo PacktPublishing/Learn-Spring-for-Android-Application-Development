@@ -1,6 +1,10 @@
 package com.packt.learn_spring_for_android_application_development.chapter7
 
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+
 
 suspend fun loadUserDetails(): User {
     delay(3000)

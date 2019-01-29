@@ -31,7 +31,7 @@ fun loadImage(avatar: String, callback: (Image) -> Unit) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     loadListOfFriends {users ->
         loadUserDetails(users.first().id) {user ->
             loadImage(user.avatar) { image: Image ->
