@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:theme="@style/LayoutTheme"
+        android:layout_height="match_parent">
+
+        <!-- Appbar -->
+        <android.support.design.widget.AppBarLayout
+                android:id="@+id/appBarLayout_pd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0">
+
+            <!-- Toolbar -->
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_pd"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorAccentBlueDark"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/displayList_com"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:listitem="@layout/post_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/postRoot_pd"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="8dp"/>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/postRoot_pd"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout_pd" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/constraintLayout_pd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      tools:text="@tools:sample/full_names"
+                      android:id="@+id/profileFullNamePost_pd"
+                      android:textStyle="bold"
+                      android:textAppearance="?android:textAppearanceSmall"
+                      app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+                      android:layout_marginTop="4dp" android:layout_marginStart="8dp"
+                      app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                      app:layout_constraintVertical_bias="0.0"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      tools:text="@tools:sample/last_names"
+                      android:id="@+id/usernamePost_pd"
+                      android:textStyle="italic"
+                      android:textAppearance="?android:textAppearanceSmall"
+                      app:layout_constraintStart_toEndOf="@+id/profileFullNamePost_pd"
+                      android:layout_marginStart="8dp"
+                      android:layout_marginTop="4dp" app:layout_constraintTop_toTopOf="parent"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      tools:text="@tools:sample/date/ddmmyy"
+                      android:id="@+id/postedDate_pd"
+                      android:textAppearance="?android:textAppearanceSmall"
+                      app:layout_constraintTop_toBottomOf="@+id/profileFullNamePost_pd"
+                      app:layout_constraintStart_toStartOf="@+id/profileFullNamePost_pd"
+                      android:layout_marginTop="4dp"
+                      app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="4dp"/>
+
+         </android.support.constraint.ConstraintLayout>
+
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  tools:text="@tools:sample/lorem"
+                  android:id="@+id/postText_pd"
+                  android:padding="4dp"
+                  android:textAppearance="?android:textAppearanceSmall"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="4dp"
+                  app:layout_constraintTop_toBottomOf="@+id/constraintLayout_pd"/>
+    </android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabMainComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_dialog_email"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+</android.support.constraint.ConstraintLayout>
