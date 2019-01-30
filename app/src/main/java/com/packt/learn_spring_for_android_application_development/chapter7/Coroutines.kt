@@ -1,8 +1,9 @@
 package com.packt.learn_spring_for_android_application_development.chapter7
 
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+
 
 class Image
 
@@ -11,7 +12,7 @@ fun loadImage() : Image {
     return Image()
 }
 
-fun main(args: Array<String>) = runBlocking {
+fun main() = runBlocking {
     val subTask1 = GlobalScope.async { loadImage() }
     val subTask2 = GlobalScope.async { loadImage() }
     val subTask3 = GlobalScope.async { loadImage() }

@@ -1,6 +1,9 @@
 package com.packt.learn_spring_for_android_application_development.chapter7
 
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 suspend fun loadUserDetails(): User {
     delay(3000)
@@ -12,7 +15,7 @@ suspend fun loadImage(avatar: String): Image {
     return Image()
 }
 
-fun main(args: Array<String>) = runBlocking {
+fun main() = runBlocking {
     val user = GlobalScope.async { loadUserDetails() }.await()
     val image = async { loadImage(user.avatar) }.await()
     showImage(image)

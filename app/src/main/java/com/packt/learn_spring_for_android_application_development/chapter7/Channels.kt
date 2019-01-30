@@ -1,14 +1,13 @@
 package com.packt.learn_spring_for_android_application_development.chapter7
 
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.channels.*
-import kotlinx.coroutines.experimental.channels.ChannelIterator
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.selects.SelectClause1
-import kotlinx.coroutines.experimental.selects.SelectClause2
-import kotlinx.coroutines.experimental.selects.select
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-fun main(args: Array<String>) = runBlocking<Unit> {
+
+fun main() = runBlocking<Unit> {
     val channel = Channel<Int>()
     launch {
         channel.send(0)

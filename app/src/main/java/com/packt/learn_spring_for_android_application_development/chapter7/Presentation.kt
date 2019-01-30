@@ -9,7 +9,9 @@ import org.springframework.web.client.RestTemplate
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.Executors
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 
 /**

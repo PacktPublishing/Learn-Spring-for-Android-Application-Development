@@ -1,8 +1,8 @@
 package com.packt.learn_spring_for_android_application_development
 
 import com.packt.learn_spring_for_android_application_development.chapter7.loadImage
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
